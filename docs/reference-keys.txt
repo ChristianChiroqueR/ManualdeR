@@ -1,4 +1,5 @@
-down-the-rabbit-hole
+primeros-pasos
+qué-es-el-r
 estadística-descriptiva
 intro
 desarrollo
