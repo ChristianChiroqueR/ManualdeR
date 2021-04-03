@@ -15,8 +15,8 @@ En este video vamos a comentar las principales características del R y qué dif
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jLFfC899ZAU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-En resumen podríamos hacer una comparación entre el R y el SPSS para ver sus principales características. 
+En resumen podríamos hacer una comparación entre el R y el SPSS para ver sus principales característicass. 
 
-![Image](/images/1-1.jpg)
+![Image](images/1-1.jpg)
 
 
