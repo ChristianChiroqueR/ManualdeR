@@ -1,3 +1,5 @@
 down-the-rabbit-hole
 estadística-descriptiva
+intro
+desarrollo
 a-caucus-race-and-a-long-tale
