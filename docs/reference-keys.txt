@@ -1,3 +1,5 @@
+sobre-el-autor
+sugerencia-de-citado
 primeros-pasos
 qué-es-el-r
 estadística-descriptiva
