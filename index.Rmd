@@ -7,7 +7,7 @@ site: bookdown::bookdown_site
 
 # Presentación { - }
 
-![Image](images/0-1.jpg)
+![](images/0-1.jpg)
 
 Este `libro` tiene como objetivo ser un soporte para el aprendizaje del software R, a  través del IDE R Studio, y está especialmente dirigido para aquellos estudiantes de ciencias sociales, en general, y ciencia política, en particular. 
 
