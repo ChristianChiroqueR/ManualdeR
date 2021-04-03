@@ -1,6 +1,6 @@
 --- 
 title: "Manual de R Studio para ciencias sociales"
-author: "Christian Chiroque Ruiz"
+author: "Christian Chiroque"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
