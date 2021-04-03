@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Manual de R Studio para ciencias sociales"
+author: "Christian Chiroque Ruiz"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
