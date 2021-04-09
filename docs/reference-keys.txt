@@ -2,6 +2,7 @@ sobre-el-autor
 sugerencia-de-citado
 primeros-pasos
 qué-es-el-r
+cómo-se-instala-en-windows
 estadística-descriptiva
 intro
 desarrollo
