@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 8 Regresión Lineal | Data Política: Manual de R para estadística aplicada al análisis político</title>
+  <meta name="description" content="Capítulo 8 Regresión Lineal | Data Política: Manual de R para estadística aplicada al análisis político" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 8 Regresión Lineal | Data Política: Manual de R para estadística aplicada al análisis político" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 8 Regresión Lineal | Data Política: Manual de R para estadística aplicada al análisis político" />
   
   
   
@@ -273,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Manual de R Studio para ciencias sociales</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Política: Manual de R para estadística aplicada al análisis político</a>
           </h1>
         </div>
 
@@ -638,15 +638,14 @@ Busque con atención la evidencia de un patrón, lo que indica que el modelo com
 ## -0.4638681</code></pre>
 <p>también lo puedes graficar para que te de una idea de forma más rápida:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="regresión-lineal.html#cb114-1"></a><span class="co">#install.packages(&quot;corrplot&quot;)</span></span>
-<span id="cb114-2"><a href="regresión-lineal.html#cb114-2"></a><span class="kw">library</span>(corrplot)</span></code></pre></div>
-<pre><code>## corrplot 0.84 loaded</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="regresión-lineal.html#cb116-1"></a><span class="co">#La funci?n cor calcula la matriz de correlaciones</span></span>
-<span id="cb116-2"><a href="regresión-lineal.html#cb116-2"></a>M&lt;-<span class="kw">cor</span>(competitividad[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">28</span>)],<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span>
-<span id="cb116-3"><a href="regresión-lineal.html#cb116-3"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>,<span class="dt">type=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+<span id="cb114-2"><a href="regresión-lineal.html#cb114-2"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb114-3"><a href="regresión-lineal.html#cb114-3"></a><span class="co">#La funci?n cor calcula la matriz de correlaciones</span></span>
+<span id="cb114-4"><a href="regresión-lineal.html#cb114-4"></a>M&lt;-<span class="kw">cor</span>(competitividad[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">28</span>)],<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb114-5"><a href="regresión-lineal.html#cb114-5"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>,<span class="dt">type=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regresión-lineal.html#cb117-1"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="regresión-lineal.html#cb115-1"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="regresión-lineal.html#cb118-1"></a><span class="kw">corrplot.mixed</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="regresión-lineal.html#cb116-1"></a><span class="kw">corrplot.mixed</span>(M)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
 </div>
 <div id="normalidad-de-residuos" class="section level3">
@@ -658,11 +657,11 @@ Busque con atención la evidencia de un patrón, lo que indica que el modelo com
 Pruebas de normalidad a los residuos. Normalmente bastaría con la prueba de Shapiro Wilk, pero también se pueden probar otros como Lillieford, Kolmogorov (no es muy exigente), entre otros.</p>
 <p><strong>Código e interpretación</strong></p>
 <p>Si usamos sólo gráfico</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal.html#cb119-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regresión-lineal.html#cb117-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Todos los puntos deben estar sobre la diagonal.</p>
 <p>Si usamos prueba de normalidad</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="regresión-lineal.html#cb120-1"></a><span class="kw">shapiro.test</span>(modelo1<span class="op">$</span>resid)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="regresión-lineal.html#cb118-1"></a><span class="kw">shapiro.test</span>(modelo1<span class="op">$</span>resid)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -681,12 +680,12 @@ Cuando no se cumple es un problema porque los estimadores no son consistentes ni
 <p>OPCIÓN 2: Con el Score Test for Non-Constant Error Variance, también llamado Test Breusch Pagan. Evalúa si la varianza del error cambia con el nivel de la variable respuesta (valores ajustados) o con una combinación lineal de predictores.</p>
 <p><strong>Código e interpretación</strong></p>
 <p>Si usamos el gráfico</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regresión-lineal.html#cb122-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="regresión-lineal.html#cb120-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>En el Gráfico la línea roja debe seguir una tendencia horizontal.</p>
 <p>Si usamos el BP:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="regresión-lineal.html#cb123-1"></a><span class="kw">library</span>(lmtest)</span>
-<span id="cb123-2"><a href="regresión-lineal.html#cb123-2"></a><span class="kw">bptest</span>(modelo1)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="regresión-lineal.html#cb121-1"></a><span class="kw">library</span>(lmtest)</span>
+<span id="cb121-2"><a href="regresión-lineal.html#cb121-2"></a><span class="kw">bptest</span>(modelo1)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
@@ -703,8 +702,8 @@ Ha: El modelo es heterocedástico</p>
 <p><strong>Cómo detectarlo</strong></p>
 <p>Con el Factor de Inflación de Varianza (VIF).</p>
 <p><strong>Código e interpretación</strong></p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regresión-lineal.html#cb125-1"></a><span class="kw">library</span>(DescTools)</span>
-<span id="cb125-2"><a href="regresión-lineal.html#cb125-2"></a><span class="kw">VIF</span>(modelo1)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="regresión-lineal.html#cb123-1"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb123-2"><a href="regresión-lineal.html#cb123-2"></a><span class="kw">VIF</span>(modelo1)</span></code></pre></div>
 <pre><code>##  competitividad$var3  competitividad$var5 competitividad$var20 
 ##             1.337011             1.231735             1.098254</code></pre>
 <p>Valores &gt; 5 indican presencia de multicolinealidad.</p>
@@ -716,11 +715,11 @@ Ha: El modelo es heterocedástico</p>
 <p><strong>Cómo detectarlo</strong></p>
 <p>Se puede realizar el Test de Durbin Watson (que mide el grado de correlación de cada error residual con el error residual “anterior”)</p>
 <p><strong>Código e interpretación</strong></p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="regresión-lineal.html#cb127-1"></a><span class="co">#Default</span></span>
-<span id="cb127-2"><a href="regresión-lineal.html#cb127-2"></a><span class="kw">library</span>(car)</span>
-<span id="cb127-3"><a href="regresión-lineal.html#cb127-3"></a><span class="kw">durbinWatsonTest</span>(modelo1)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regresión-lineal.html#cb125-1"></a><span class="co">#Default</span></span>
+<span id="cb125-2"><a href="regresión-lineal.html#cb125-2"></a><span class="kw">library</span>(car)</span>
+<span id="cb125-3"><a href="regresión-lineal.html#cb125-3"></a><span class="kw">durbinWatsonTest</span>(modelo1)</span></code></pre></div>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1     -0.04132242      1.743747   0.492
+##    1     -0.04132242      1.743747   0.478
 ##  Alternative hypothesis: rho != 0</code></pre>
 <p>Durbin Watson: Las hipótesis son:
 H0: Los residuos son independientes

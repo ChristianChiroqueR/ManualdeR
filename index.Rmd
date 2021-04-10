@@ -1,5 +1,5 @@
 --- 
-title: "Manual de R Studio para ciencias sociales"
+title: "Data Política: Manual de R para estadística aplicada al análisis político"
 author: "Christian Chiroque"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -31,6 +31,6 @@ Es creador de Data Política (canal de youtube para la difusión de estadística
 
 ## Sugerencia de citado
 
-Chiroque, Christian (2020) *Manual de R Studio para ciencias sociales*. Data Política: Lima
+Chiroque, Christian (2020) *Data Polìtica: Manual R para estadística aplicada al análisis político*. Data Política: Lima. Link
 
 
