@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Conseguir la data | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 3 Conseguir la data | Manual de R Studio para ciencias sociales" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Conseguir la data | Manual de R Studio para ciencias sociales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Conseguir la data | Manual de R Studio para ciencias sociales" />
+  
+  
+  
+
+<meta name="author" content="Christian Chiroque" />
+
+
+<meta name="date" content="2021-04-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-un-lenguaje-de-programación.html"/>
+<link rel="next" href="preprocesamiento.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Política</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#sobre-el-autor"><i class="fa fa-check"></i><b>0.1</b> Sobre el autor</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#sugerencia-de-citado"><i class="fa fa-check"></i><b>0.2</b> Sugerencia de citado</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html"><i class="fa fa-check"></i><b>1</b> R, un software libre</a><ul>
+<li class="chapter" data-level="1.1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#aspectos-básicos"><i class="fa fa-check"></i><b>1.1</b> Aspectos básicos</a></li>
+<li class="chapter" data-level="1.2" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#guía-de-instalación"><i class="fa fa-check"></i><b>1.2</b> Guía de instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html"><i class="fa fa-check"></i><b>2</b> R, un lenguaje de programación</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#entorno-de-programación"><i class="fa fa-check"></i><b>2.1</b> Entorno de programación</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#consola"><i class="fa fa-check"></i><b>2.1.1</b> Consola</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#manuales-del-programador"><i class="fa fa-check"></i><b>2.1.2</b> Manuales del programador</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#paquetes"><i class="fa fa-check"></i><b>2.1.3</b> Paquetes</a></li>
+<li class="chapter" data-level="2.1.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#funciones"><i class="fa fa-check"></i><b>2.1.4</b> Funciones</a></li>
+<li class="chapter" data-level="2.1.5" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#objetos"><i class="fa fa-check"></i><b>2.1.5</b> Objetos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#código-en-r"><i class="fa fa-check"></i><b>2.2</b> Código en R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#script"><i class="fa fa-check"></i><b>2.2.1</b> Script</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-markdown"><i class="fa fa-check"></i><b>2.2.2</b> R Markdown</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-notebook"><i class="fa fa-check"></i><b>2.2.3</b> R Notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#clases-de-objetos-en-r"><i class="fa fa-check"></i><b>2.3</b> Clases de objetos en R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#identificando-el-tipo-de-objeto"><i class="fa fa-check"></i><b>2.3.1</b> Identificando el tipo de objeto</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#características-de-los-objetos"><i class="fa fa-check"></i><b>2.3.2</b> Características de los objetos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#acceder-a-las-partes-de-un-objeto"><i class="fa fa-check"></i><b>2.3.3</b> Acceder a las partes de un objeto</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#sugerencias"><i class="fa fa-check"></i><b>2.3.4</b> Sugerencias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html"><i class="fa fa-check"></i><b>3</b> Conseguir la data</a><ul>
+<li class="chapter" data-level="3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>3.1</b> Directorio de trabajo</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#nuevo-directorio"><i class="fa fa-check"></i><b>3.1.1</b> Nuevo directorio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#github-y-r"><i class="fa fa-check"></i><b>3.2</b> GitHub y R</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-el-programa-git"><i class="fa fa-check"></i><b>3.2.1</b> Instalar el programa GIT</a></li>
+<li class="chapter" data-level="3.2.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-una-cuenta-en-github"><i class="fa fa-check"></i><b>3.2.2</b> Crear una cuenta en GitHub</a></li>
+<li class="chapter" data-level="3.2.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-repositorio"><i class="fa fa-check"></i><b>3.2.3</b> Crear repositorio</a></li>
+<li class="chapter" data-level="3.2.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-github-desktop"><i class="fa fa-check"></i><b>3.2.4</b> Instalar GitHub Desktop</a></li>
+<li class="chapter" data-level="3.2.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#clonar-un-repositorio-de-la-nube-en-mi-disco-local"><i class="fa fa-check"></i><b>3.2.5</b> Clonar un repositorio (de la nube) en mi disco local</a></li>
+<li class="chapter" data-level="3.2.6" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#agregar-cambios-a-la-nube-push"><i class="fa fa-check"></i><b>3.2.6</b> Agregar cambios a la nube (PUSH)</a></li>
+<li class="chapter" data-level="3.2.7" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#descargar-cambios-desde-la-nube-pull"><i class="fa fa-check"></i><b>3.2.7</b> Descargar cambios desde la nube (PULL)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#sugerencias-1"><i class="fa fa-check"></i><b>3.2.8</b> Sugerencias</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#manipular-bases-de-datos"><i class="fa fa-check"></i><b>3.3</b> Manipular bases de datos</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-localmente"><i class="fa fa-check"></i><b>3.3.1</b> Importar localmente</a></li>
+<li class="chapter" data-level="3.3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-desde-la-nube-github"><i class="fa fa-check"></i><b>3.3.2</b> Importar desde la nube (GITHUB)</a></li>
+<li class="chapter" data-level="3.3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#convertir-archivos"><i class="fa fa-check"></i><b>3.3.3</b> Convertir archivos</a></li>
+<li class="chapter" data-level="3.3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#exportar-archivos"><i class="fa fa-check"></i><b>3.3.4</b> Exportar archivos</a></li>
+<li class="chapter" data-level="3.3.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#palabras-clave"><i class="fa fa-check"></i><b>3.3.5</b> Palabras clave</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#web-scrapping"><i class="fa fa-check"></i><b>3.4</b> Web scrapping</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#introducción"><i class="fa fa-check"></i><b>3.4.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.4.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#paso-a-paso"><i class="fa fa-check"></i><b>3.4.2</b> Paso a paso</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preprocesamiento.html"><a href="preprocesamiento.html"><i class="fa fa-check"></i><b>4</b> Preprocesamiento</a><ul>
+<li class="chapter" data-level="4.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#configuración-de-variables"><i class="fa fa-check"></i><b>4.1</b> Configuración de variables</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-a-factor"><i class="fa fa-check"></i><b>4.1.1</b> Convertir a factor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#estructura-de-una-variable"><i class="fa fa-check"></i><b>4.1.2</b> Estructura de una variable</a></li>
+<li class="chapter" data-level="4.1.3" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-en-ordinal"><i class="fa fa-check"></i><b>4.1.3</b> Convertir en ordinal</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#datos-perdidos"><i class="fa fa-check"></i><b>4.2</b> Datos perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html"><i class="fa fa-check"></i><b>5</b> Análisis exploratorio de datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#punto-de-partida"><i class="fa fa-check"></i><b>5.1</b> Punto de partida</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#para-nominales"><i class="fa fa-check"></i><b>5.2</b> Para nominales</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#preparación"><i class="fa fa-check"></i><b>5.2.1</b> Preparación</a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-descriptivos"><i class="fa fa-check"></i><b>5.2.2</b> Estadísticos descriptivos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#gráficos"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Manual de R Studio para ciencias sociales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conseguir-la-data" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Conseguir la data</h1>
+<div id="directorio-de-trabajo" class="section level2">
+<h2><span class="header-section-number">3.1</span> Directorio de trabajo</h2>
+<p>Para comenzar el trabajo con el R Studio lo primero que debemos hacer es decirle al programa cuál es la ubicación de nuestra carpeta de trabajo (<em>working directory</em>).</p>
+<p>El <em>working directory</em> es el lugar en nuestra computadora (local) en el que están los archivos que vamos a utilizar durante nuestra sesión de trabajo. De la misma manera, es el lugar donde se encontrarán todos los documentos u objetos que vamos a producir en nuestro análisis (tablas, gráficos, bases de datos, entre otros).</p>
+<p>Antes de realizar cualquier análisis debemos seleccionar la carpeta que será nuestro directorio de trabajo, con el fin de mantener un orden durante toda la jornada.</p>
+<p>Para saber cuál es el directorio en el cual me encuentro trabajando sólo necesitamos redactar el siguiente comando.</p>
+<pre><code>getwd()</code></pre>
+<p>Una vez aplicado dicha función, el R Studio nos dirá la ubicación en la cual está nuestra carpeta. Por ejemplo: "D:/Mis Documentos/R</p>
+<div id="nuevo-directorio" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Nuevo directorio</h3>
+<p>Para ello tenemos dos opciones.</p>
+<p>La primera implica redactar un código, en el cual le decimos al programa la nueva dirección de nuestro directorio de trabajo.</p>
+<pre><code>setwd(&quot;D:/Mis Documentos/Trabajos finales/examen parcial&quot;)</code></pre>
+<p>La segunda opción es más sencilla. Esta consiste en el uso de la propia interfaz del R Studio.</p>
+<p>Debemos ir a Session &gt; Set Working Directory &gt; Choose Directory</p>
+<div class="figure">
+<img src="images/2-1-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Luego de ello, seleccionamos la carpeta de nuestra preferencia y colocamos “Abrir”</p>
+<div class="figure">
+<img src="images/2-1-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+</div>
+</div>
+<div id="github-y-r" class="section level2">
+<h2><span class="header-section-number">3.2</span> GitHub y R</h2>
+<div class="figure">
+<img src="images/2-2-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Como mencionamos en el apartado anterior, lo primero que debemos hacer antes de iniciar nuestra sesión es seleccionar nuestro <em>directorio de trabajo</em>. Cuando hacemos eso, todos los archivos que utilizamos o produzcamos se van a alojar en un lugar en nuestra computadora.</p>
+<p>Una limitante de ello es que, obviamente, si nos quedamos en ese paso, siempre debemos estar en nuestra computadora para utilizar nuestros archivos.</p>
+<p>Por ello, una estrategia utilizada por muchos usuarios del R Studio, así como de otros lenguajes de programación, es utilizar la plataforma GitHub para poder trabajar con sus archivos desde la nube (desde el almacenamiento virtual de la propia plataforma).</p>
+<p>Seguramente en más de una ocasión hemos utilizado algunos programas de almacenamiento de datos en la nube como Google Drive o Dropbox. Lo que hacíamos era elegir nuestros archivos, guardarnos en nuestra cuenta de Google o Dropbox y, de esa manera, podíamos acceder a nuestros archivos desde cualquier computadora con acceso a internet.</p>
+<div class="figure">
+<img src="images/2-2-14.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>De la misma manera que el Google Drive o el Dropbox, el GitHub (creado el 2008) puede servir como un lugar de almacenamiento donde nosotros podemos guardar los documentos que vamos a utilizar en nuestra análisis: bases de datos, scripts, objetos producidos (tablas, gráficos), etc.</p>
+<p>Sin embargo, la característica más fundamental del GitHub no es sólo su capacidad de almacenamiento, sino que es un espacio específicamente diseñado para desarrolladores de software. De esta manera, uno puede <strong>alojar</strong> su proyecto en el sitio web y puede gestionar diversas versiones utilizando <strong>el sistema de control de version GIT</strong>.</p>
+<p>En otras palabas, el GitHub sirve para que un programador pueda subir el código en el que está trabajando, alojarlo en la nube y permitir el trabajo colaborativo con otros programadores. Para ello, se deben crear <strong>repositorios</strong>, los cuales son compartimientos específicos donde se colocan los archivos de un proyecto determinado.</p>
+<p>Ejemplo: Imagina que te encuentras desarrollando un script para el examen final, pero deseas trabajarlo colaborativamente. Para ello, creas un repositorio, subes el código en el que estás trabajando (script) y le das acceso a los miembros de tu grupo para que puedan editar el documento. El primer día tu puedes editar el documento, es la versión 1. En el segundo día, tu compañero hace un añadido, es la versión 2, así sucesivamente. El GitHub te permite colaborar en proyectos conjuntos y tener un historial de todas las versiones de un mismo proyecto de programación (como en este caso el script de tu análisis estadístico).</p>
+<p>En este libro vamos a explorar cómo utilizar el GitHub a través del Github Desktop.</p>
+<div id="instalar-el-programa-git" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Instalar el programa GIT</h3>
+<p>Como se había mencionado, el GitHub se basa en el GIT, el cual es un software para controlar versiones. Por ello, antes de seguir con el GitHub debemos instalar este software en nuestra computadora.</p>
+<p>Para ello, entramos al siguiente enlace:</p>
+<p><a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p>
+<p>Y luego, seleccionamos la opción más adecuada para nosotros según nuestro sistema operativo (Windows, Mac o Linux)</p>
+<div class="figure">
+<img src="images/2-2-0.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Una vez instalado podemos seguir con los siguientes pasos.</p>
+</div>
+<div id="crear-una-cuenta-en-github" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Crear una cuenta en GitHub</h3>
+<p>Para crear tu cuenta en GitHub es necesario entrar a: www.github.com</p>
+<div class="figure">
+<img src="images/2-2-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Selecciones un nombre de usuario, un correo electrónico a asociar y una contraseña. Una vez te suscribas a la página ya tendrás un usuario donde podrás alojar tus repositorios.</p>
+</div>
+<div id="crear-repositorio" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Crear repositorio</h3>
+<p>Para ello simplemente damos click a “New”:</p>
+<div class="figure">
+<img src="images/2-2-3.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Detallamos cuál será el nombre de nuestro repositorio (en este caso “mi_repositorio”) y damos click a “Crear Repositorio”:</p>
+<div class="figure">
+<img src="images/2-2-4.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Listo, ya tenemos la cuenta y nuestro repositorio creado.</p>
+</div>
+<div id="instalar-github-desktop" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Instalar GitHub Desktop</h3>
+<p>Una vez que tengamos nuestra cuenta de GitHub y ya tengamos nuestro repositorio creado, viene el siguiente paso: agregar archivos y enlazar nuestro proyecto de R con la plataforma GitHub para almacenarlo en la nube y permitir el control de versiones.</p>
+<p>En otras palabras, deseo que mi carpeta de trabajo (<em>working directory</em>) esté enlazada con el GitHub.</p>
+<p>Para ello, a fin de hacer más sencillo el trabajo, sugiero instalar el software GitHub Desktop. Este es un programa para enviar/solicitar cambios en nuestros repositorios de forma más fácil y sencilla.</p>
+<p>Lo podemos descargar en:</p>
+<p><a href="https://desktop.github.com/" class="uri">https://desktop.github.com/</a></p>
+<p>Seleccionamos la opción más adecuada según nuestro SO y lo instalamos:</p>
+<div class="figure">
+<img src="images/2-2-5.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Una vez esté instalado, abrimos el programa, ingresamos nuestro usuario y contraseña y ya estará enlazado con nuestra cuenta de GitHub en la nube. Esto quiere decir que nosotros podemos “descargar nuestros archivos” de nuestra cuenta y también “enviar nuevas versiones” de los mismos.</p>
+</div>
+<div id="clonar-un-repositorio-de-la-nube-en-mi-disco-local" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Clonar un repositorio (de la nube) en mi disco local</h3>
+<p>Seleccionamos “Clone Repository”</p>
+<div class="figure">
+<img src="images/2-2-6.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Como ya está enlazado con nuestro usuario, el programa nos va a solicitar que elijamos un repositorio de nuestra cuenta. También nos va a pedir que seleccionamos la ubicación que tendrá ese repositorio (carpeta) en nuestra computadora.</p>
+<div class="figure">
+<img src="images/2-2-7.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Una vez terminemos estos pasos nos daremos cuenta que en la ubicación que hemos seleccionado se creó una carpeta con el mismo nombre que nuesro repositorio.</p>
+</div>
+<div id="agregar-cambios-a-la-nube-push" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> Agregar cambios a la nube (PUSH)</h3>
+<p>Bien, ahora comencemos a utilizar el GitHub. Por ejemplo, entremos a R Studio y seleccionemos que el <em>Directorio de trabajo</em> sea la carpeta de nuestro repositorio (ver sección anterior).</p>
+<div class="figure">
+<img src="images/2-2-8.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Creemos un Script para ver cómo funciona. Hemos creado un script en nuestra carpeta local que está linkeada a nuestro repositorio.</p>
+<div class="figure">
+<img src="images/2-2-12.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Una vez hecho el cambio (creación de Script) nos vamos al GitHub Desktop.</p>
+<div class="figure">
+<img src="images/2-2-9.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p><strong>Recuerda que debes asegurarte que has guardado los cambios en cada archivo que has editado localmente.</strong></p>
+<p>Lo que debemos ver en el GitHub Desktop es que en la parte izquierda figuran la lista de todos los cambios realizados (en este caso dice que agregamos un archivo que se llama Script1). En el panel derecho nos aparece el detalle de ese cambio (es decir el contenido en este caso).</p>
+<p>A continuación, le damos un nombre a ese cambio en la casilla que se encuentra en la parte inferior y seleccionamos Commit to Master.</p>
+<div class="figure">
+<img src="images/2-2-10.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Finalmente para “enviar” esos cambios a nuestro repositorio le damos click a <strong>Push</strong>.</p>
+<p>Luego de eso, si vamos al GitHub (nube) nos vamos a dar cuenta que nuestro cambio (creación del Script1) ya figura en nuestro repositorio.</p>
+<div class="figure">
+<img src="images/2-2-11.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>De la misma manera que hemos creado este script y lo hemos subido, podemos hacer lo mismo con bases de datos, gráficos, tablas o con cualquier otro tipo de documento.</p>
+<p>La lógica siempre será la misma: editar los documentos -&gt; guardar los cambios localmente -&gt; Ir al GitHub Desktop -&gt; Verificar que los cambios realizados aparezcan en el panel -&gt; Darle un nombre a ese cambio -&gt; Poner Commit to Master -&gt; Colocar <strong>Push</strong></p>
+</div>
+<div id="descargar-cambios-desde-la-nube-pull" class="section level3">
+<h3><span class="header-section-number">3.2.7</span> Descargar cambios desde la nube (PULL)</h3>
+<p>Si es que alguien ha realizado algún cambio a tu proyecto en la nube es fácilmente de descargar esos cambios localmente.</p>
+<p>Cuando abras tu GitHub Desktop vas a la parte superior que dice “Fetch origin”.</p>
+<div class="figure">
+<img src="images/2-2-13.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Luego, si es que existe algún cambio realizado, vas a ver que automáticamente te sale la opción de “Pull origin”. Cuando presionas esa opción todos los cambios hechos en la nube se descargarán localmente.</p>
+<p><strong>Recuerda siempre llevar un orden en tus ediciones de tal manera que no se genere conflictos en los documentos editados. Edita localmente, guarda cambios localmente, presiona Push origin. Edita en la nube, guarda los cambios en la nube, presiona Fetch Origin, presiona Pull origin.</strong></p>
+</div>
+<div id="sugerencias-1" class="section level3">
+<h3><span class="header-section-number">3.2.8</span> Sugerencias</h3>
+<p>Puedes buscar mayor información con las siguientes palabras clave:</p>
+<ul>
+<li>How to connect GitHub with R</li>
+<li>GitHub in R Studio</li>
+<li>How works GitHub Desktop</li>
+</ul>
+</div>
+</div>
+<div id="manipular-bases-de-datos" class="section level2">
+<h2><span class="header-section-number">3.3</span> Manipular bases de datos</h2>
+<p>Lo primero que tenemos que tener en claro en el proceso de manejo de bases de datos son tres cosas:</p>
+<ul>
+<li>Importar: Traer una base de datos de la nube o de nuestra computadora (local) hacia nuestro entorno de trabajo.</li>
+<li>Convertir: Cambiar el formato de una base de datos que tenemos en nuestro entorno de trabajo.</li>
+<li>Exportar: Guardar una base de datos que hemos trabajado como un nuevo archivo.</li>
+</ul>
+<p>Para ello, vamos a hacer uso del paquete <code>rio</code>, el cual es un conjunto de funciones que nos permiten realizar estas tres operaciones de una manera sencilla y rápida. Lo importante de este paquete a comparación de otros es que optimiza el proceso de importación/exportación de datos requiriendo una menor cantidad de código que otros paquetes.</p>
+<p>Puedes leer más sobre el paquete <code>rio</code> haciendo click a <a href="https://www.rdocumentation.org/packages/rio/versions/0.5.16">este enlace</a>.</p>
+<p>Para utilizar este paquete debemos instalarlo y luego abrirlo.</p>
+<pre><code>install.packages(&quot;rio&quot;)
+library(rio)</code></pre>
+<div id="importar-localmente" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Importar localmente</h3>
+<p>Una vez ya tengamos nuestro directorio de trabajo establecido, lo siguiente es abrir una base de datos. Imaginemos que en nuestro directorio de trabajo tenemos una base llamada trabajadores.sav</p>
+<p>Lo que queremos hacer es abrir la data en el R. Para ello, lo único que tenemos que hacer es utilizar la función <code>import</code>:</p>
+<pre><code>data=import(&quot;trabajadores.sav&quot;)</code></pre>
+<p>Lo que le estamos diciendo al programa es que importe la data <em>trabajadores.sav</em> y que le de el nombre de <em>data</em>.</p>
+<p><strong>Recuerda que para escribirlo de esa manera el archivo(base de datos) ya debe encontrarse en tu carpeta de trabajo. Si lo tienes en alguna otra parte de tu computadora puedes escribir el enlace, como por ejemplo: C:/Mis documentos/Clase R/trabajadores.sav.</strong></p>
+</div>
+<div id="importar-desde-la-nube-github" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Importar desde la nube (GITHUB)</h3>
+<p>En el apartado anterior habíamos revisado las ventajas de trabajar con repositorios en la nube. Por ello, también podemos importar datos a nuestro entorno de trabajo que no se encuentren en nuestro disco duro local sino alojado en una plataforma en la nube (como GitHub).</p>
+<p>Lo primero que tenemos que hacer es conseguir el link de la data. Para ello, debemos ir al repositorio donde está alojada la data, darle click al archivo que deseamos utilizamos y luego ubicar el botón que dice “Descargar”.</p>
+<div class="figure">
+<img src="images/3-1-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Nosotros no vamos a presionar este botón (porque lo que haríamos sería descargar el archivo en nuestra computadora), sino que le vamos a dar click derecho y vamos a presionar “copiar dirección de enlace”. En el ejemplo de la imagen el enlace que copiamos es:</p>
+<p><strong><a href="https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav" class="uri">https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav</a></strong></p>
+<p>Luego de ello, ya en nuestro R, vamos a crear un objeto que se llame <em>link</em> y que sea equivalente a esa dirección.</p>
+<pre><code>link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav&quot;</code></pre>
+<p>Luego, utilizaremos la función <code>import</code> para traer la data de la nube y le llamaremos <em>trabajadores</em>.</p>
+<pre><code>trabajadores=import(link)</code></pre>
+<p>Finalmente, podemos ver que en nuestro apartado de objetos (cuadrante superior derecho) ya figura la data que hemos importado desde la nube:</p>
+<div class="figure">
+<img src="images/3-1-3.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+</div>
+<div id="convertir-archivos" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Convertir archivos</h3>
+<p>Hasta este punto quizás los tipos de bases de datos más comunes que hemos visto son de formato Excel (.xls), SPSS (.sav) o los del propio R (.rda). Sin embargo, es muy probable que, a medida que avancemos en el uso del software, nos topemos con archivos de otros formatos.</p>
+<p>Hay un conjunto muy largo de <em>extensiones</em>, cada una de estas asociada a un programa en específico. Lo bueno del paquete <code>rio</code> es que nos permite convertir un archivo de un formato a otro de forma muy rápida.</p>
+<p>Por ejemplo, si tengo la base de datos de <em>trabajadores.sav</em> en mi carpeta de trabajo y deseo convertirla a formato .rda, sólo tengo que escribir el siguiente comando:</p>
+<pre><code>convert(&quot;trabajadores.sav&quot;, &quot;trabajadores.rda&quot;)</code></pre>
+<p>Cuando veamos nuestra carpeta vamos a ver que se ha creado una nueva versión de la base de datos pero con la extensión que le hemos indicado.</p>
+<p>Para más detalle sobre extensiones y programas asociados <a href="https://cran.r-project.org/web/packages/rio/vignettes/rio.html#supported_file_formats">ver aquí</a>.</p>
+</div>
+<div id="exportar-archivos" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Exportar archivos</h3>
+<p>Finalmente, siguiendo la línea de lo comentado líneas arriba, para exportar un archivo que tengamos en nuestra sesión sólo debemos escribir la siguiente línea de comando:</p>
+<pre><code>export(trabajadores, &quot;trabajadores.csv&quot;)</code></pre>
+<p>Lo que le estamos diciendo al programa es que guarde la base de datos <em>trabajadores</em> (que viene a ser la data que tenemos abierta en nuestra sesión) como un archivo llamado <em>trabajadores.csv</em>. Si no deseamos exportar un archivo a .csv podemos indicarle el formato que queremos colcando la extensión respectiva.</p>
+</div>
+<div id="palabras-clave" class="section level3">
+<h3><span class="header-section-number">3.3.5</span> Palabras clave</h3>
+<ul>
+<li>How to import files in R</li>
+<li>Export and import packages</li>
+<li>Get my data in R</li>
+</ul>
+</div>
+</div>
+<div id="web-scrapping" class="section level2">
+<h2><span class="header-section-number">3.4</span> Web scrapping</h2>
+<div id="introducción" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Introducción</h3>
+<p>Como sabemos, en el R Studio nosotros trabajamos sobre objetos. Pues bien, algunas veces nosotros podemos tener nuestros objetos (bases de datos, usualmente) de archivos que nos entregan directamente; sin embargo, otras veces la información se encuentra en diversas páginas web dentro del internet.</p>
+<div class="figure">
+<img src="images/3-5-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>El <strong>Web Sraping</strong> es una técnica para conseguir información de forma rápida y sistematizada por medio de algoritmos de búsquedas. Para el caso del R Studio, es necesario utilizar paquetes construidos específicamente para web scraping. En otras palabras, estos paquetes lo que hacen es entrar a una página web, extraen cierta información que le indiquemos y lo cargan a nuestra sesión de R Studio</p>
+<p><strong>Algunos puntos a tener en cuenta</strong></p>
+<p>Para hacer Web Scraping es necesario tener algunas consideraciones previas si es que antes no hemos explorado el contenido de una página web.</p>
+<ul>
+<li><p>De antemano sabemos que existen distintos tipos de páginas web, algunos parecen una hoja con letras (como si fuese una hoja de Word), pero muchas contienen ciertos elementos: videos, tablas, cuadros, imágenes, enlaces, entre otros. Entrar al mundo de cómo se construyen las páginas web es un objetivo que escapa a este apartado. Sin embargo, será necesario recordar que detrás de lo que vemos siempre existen un conjunto de códigos, denominado código fuente, que han servido para construir la página web.</p></li>
+<li><p>Sabiendo el código de ciertos elementos, como es el caso de las tablas, nosotros podemos decirle al R Studio que nos <strong>extraiga</strong> cierta información a nuestro entorno de trabajo.</p></li>
+<li><p>Para ello, necesitamos el paquete “htmltab” el cual sirve para poder extraer tablas de diversos tipos de páginas web construidas en lenguaje html.</p></li>
+<li><p>Es necesario anotar que existen muchos paquetes diseñados para web scraping. Otro paquete conocido es el paquete Rvest, cuyo contenido también te recomiendo revisar en <a href="https://cran.r-project.org/web/packages/rvest/rvest.pdf">este enlace</a>.</p></li>
+</ul>
+</div>
+<div id="paso-a-paso" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Paso a paso</h3>
+<div id="identificar-nuestra-página-web-y-la-tabla-que-queremos-descargar" class="section level4">
+<h4><span class="header-section-number">3.4.2.1</span> Identificar nuestra página web y la tabla que queremos descargar</h4>
+<p>Primero tenemos que identificar nuestra página. En este caso entraremos a la página web de <a href="https://es.wikipedia.org/wiki/Anexo:Departamentos_del_Per%C3%BA_por_IDH">Wikipedia titulada <em>Departamentos del Perú por IDH</em></a>.</p>
+<p>En esta página web figura una tabla con los departamentos del Perú y los resultados que han obtenido en las distintas mediciones del Índice de Desarrollo Humano.</p>
+<div class="figure">
+<img src="images/3-5-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Listo, tenemos ya identificada nuestra página web y el <em>objeto</em> que queremos extraer (tabla de resultados de IDH según departamento en el Perú)</p>
+</div>
+<div id="inspeccionar-la-página-web-y-encontrar-el-código-de-la-tabla" class="section level4">
+<h4><span class="header-section-number">3.4.2.2</span> Inspeccionar la página web y encontrar el <em>código</em> de la tabla</h4>
+<p>Para ello tenemos que darle click derecho a nuestra tabla y seleccionar la opción <strong>inspeccionar</strong>.</p>
+<div class="figure">
+<img src="images/3-5-2-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Vamos a ver que nos sale una subventana en la parte derecha que tiene muchos códigos. Tranquilos, estos códigos son la <strong>infraestructura</strong> de la página web. Cada letra y objeto que vemos en la vista normal tiene un código detrás con el cual ha sido programado. Literalmente estamos viendo la Matrix.</p>
+<p>Pues bien, luego de poner click derecho sobre nuestra tabla vamos ubicando el cursos en las líneas superiores hasta que veamos que la tabla se sombree por completo.</p>
+<div class="figure">
+<img src="images/3-5-3.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Luego de eso, damos click derecho sobre ese código, seleccionamos <em>Copy</em> y <em>Copy Xpath</em>.</p>
+<div class="figure">
+<img src="images/3-5-4.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>El <em>Xpath</em> es como si fuese una ubicación del objeto que queremos extraer dentro de toda la infraestructura html de la página web.</p>
+<p>Vemos que en este caso lo que copiamos es lo siguiente:</p>
+<div class="figure">
+<img src="images/3-5-5.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+</div>
+<div id="utilizar-el-paquete-htmltab" class="section level4">
+<h4><span class="header-section-number">3.4.2.3</span> Utilizar el paquete <em>htmltab</em></h4>
+<p>Una vez identificado la dirección de la página web y el <em>Xpath</em> del elemento que queremos descargar, ya podemos utilizar el paquete <em>htmltab</em>. Abrimos el paquete:</p>
+<pre><code>library(htmltab)</code></pre>
+<p>Creamos dos objetos. Primero un objeto que sea el link de la página web y otro objeto que sea el código Xpath.</p>
+<pre><code>link_de_pagina= &quot;https://es.wikipedia.org/wiki/Anexo:Departamentos_del_Per%C3%BA_por_IDH&quot;
+codigoXPATH =&#39;//*[@id=&quot;mw-content-text&quot;]/div[1]/center/table&#39;</code></pre>
+<p><strong>Cuidado: Si observas bien, en un caso hemos usado las "" y en otro ’’. Debes recordar que en el caso del Xpath vamos a utilizar las comillas simples. Estas se pueden incluir presionando ALT + 39.</strong></p>
+<p>Luego, aplicamos la función htmltab en la cual le indicamos, en primer lugar, la dirección de la página (doc = link_de_página) y la ubicación del objeto que queremos extraer (which =codigoXPATH). A la base de datos extraída le daremos el nombre de data_IDH</p>
+<pre><code>data_IDH = htmltab(doc = link_de_pagina, which =codigoXPATH)</code></pre>
+<p>Para finalizar vemos que en la parte superior derecha de nuestro entorno de trabajo ya figura un objeto que es nuestra base de datos extraída. Para corroborar los elementos (variables) de nuestra base de datos utilizamos la función names:</p>
+<pre><code>names(data_IDH)
+
+##  [1] &quot;#&quot;                                    
+##  [2] &quot;Departamento&quot;                         
+##  [3] &quot;CÃ³digoÂ ISO&quot;                         
+##  [4] &quot;CÃ³digo Ubigeo&quot;                       
+##  [5] &quot;Capital&quot;                              
+##  [6] &quot;Ã\215ndice de desarrollo humano 1993&quot;    
+##  [7] &quot;Ã\215ndice de desarrollo hbr/&gt;2000&quot;      
+##  [8] &quot;Ã\215ndice de desarrollo humano 2003&quot;    
+##  [9] &quot;Ã\215ndice de desarrollo humano 2005&quot;    
+## [10] &quot;Ã\215ndice de desarrollo humano 2007&quot;    
+## [11] &quot;Ã\215ndice de desarrollo humano 2012 â\200‹&quot;
+## [12] &quot;Ã\215ndice de desarrollo humano 2019 â\200‹&quot;</code></pre>
+<p>También le podemos aplicar el comando str() para ver la estructura de nuestro data.frame:</p>
+<pre><code>str(data_IDH)
+
+## &#39;data.frame&#39;:    24 obs. of  12 variables:
+##  $ #                                    : chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ Departamento                         : chr  &quot;Lima&quot; &quot;Moquegua&quot; &quot;Arequipa&quot; &quot;Madre de Dios&quot; ...
+##  $ CÃ³digoÂ ISO                         : chr  &quot;PE-LIM&quot; &quot;PE-MOQ&quot; &quot;PE-ARE&quot; &quot;PE-MDD&quot; ...
+##  $ CÃ³digo Ubigeo                       : chr  &quot;15&quot; &quot;18&quot; &quot;04&quot; &quot;17&quot; ...
+##  $ Capital                              : chr  &quot;Lima&quot; &quot;Moquegua&quot; &quot;Arequipa&quot; &quot;Puerto Maldonado&quot; ...
+##  $ Ãndice de desarrollo humano 1993    : chr  &quot;0,6827&quot; &quot;0,6208&quot; &quot;0,6503&quot; &quot;0,5956&quot; ...
+##  $ Ãndice de desarrollo hbr/&gt;2000      : chr  &quot;0,7440&quot; &quot;0,6661&quot; &quot;0,6352&quot; &quot;0,6206&quot; ...
+##  $ Ãndice de desarrollo humano 2003    : chr  &quot;0,7189&quot; &quot;0,6499&quot; &quot;0,6526&quot; &quot;0,6010&quot; ...
+##  $ Ãndice de desarrollo humano 2005    : chr  &quot;0,7039&quot; &quot;0,6435&quot; &quot;0,6463&quot; &quot;0,5997&quot; ...
+##  $ Ãndice de desarrollo humano 2007    : chr  &quot;0,6788&quot; &quot;0,6532&quot; &quot;0,6479&quot; &quot;0,6304&quot; ...
+##  $ Ãndice de desarrollo humano 2012 â€‹: chr  &quot;0,6340&quot; &quot;0,6215&quot; &quot;0,5781&quot; &quot;0,5582&quot; ...
+##  $ Ãndice de desarrollo humano 2019 â€‹: chr  &quot;0,7073&quot; &quot;0,6589&quot; &quot;0,6425&quot; &quot;0,6136&quot; ...</code></pre>
+<p>Ya tenemos nuestra data de IDH como un objeto en nuestro R Studio.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-un-lenguaje-de-programación.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preprocesamiento.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/03-race.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/03-race.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 R, un lenguaje de programación | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 2 R, un lenguaje de programación | Manual de R Studio para ciencias sociales" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 R, un lenguaje de programación | Manual de R Studio para ciencias sociales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 R, un lenguaje de programación | Manual de R Studio para ciencias sociales" />
+  
+  
+  
+
+<meta name="author" content="Christian Chiroque" />
+
+
+<meta name="date" content="2021-04-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-un-software-libre.html"/>
+<link rel="next" href="conseguir-la-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Política</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#sobre-el-autor"><i class="fa fa-check"></i><b>0.1</b> Sobre el autor</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#sugerencia-de-citado"><i class="fa fa-check"></i><b>0.2</b> Sugerencia de citado</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html"><i class="fa fa-check"></i><b>1</b> R, un software libre</a><ul>
+<li class="chapter" data-level="1.1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#aspectos-básicos"><i class="fa fa-check"></i><b>1.1</b> Aspectos básicos</a></li>
+<li class="chapter" data-level="1.2" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#guía-de-instalación"><i class="fa fa-check"></i><b>1.2</b> Guía de instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html"><i class="fa fa-check"></i><b>2</b> R, un lenguaje de programación</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#entorno-de-programación"><i class="fa fa-check"></i><b>2.1</b> Entorno de programación</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#consola"><i class="fa fa-check"></i><b>2.1.1</b> Consola</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#manuales-del-programador"><i class="fa fa-check"></i><b>2.1.2</b> Manuales del programador</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#paquetes"><i class="fa fa-check"></i><b>2.1.3</b> Paquetes</a></li>
+<li class="chapter" data-level="2.1.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#funciones"><i class="fa fa-check"></i><b>2.1.4</b> Funciones</a></li>
+<li class="chapter" data-level="2.1.5" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#objetos"><i class="fa fa-check"></i><b>2.1.5</b> Objetos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#código-en-r"><i class="fa fa-check"></i><b>2.2</b> Código en R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#script"><i class="fa fa-check"></i><b>2.2.1</b> Script</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-markdown"><i class="fa fa-check"></i><b>2.2.2</b> R Markdown</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-notebook"><i class="fa fa-check"></i><b>2.2.3</b> R Notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#clases-de-objetos-en-r"><i class="fa fa-check"></i><b>2.3</b> Clases de objetos en R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#identificando-el-tipo-de-objeto"><i class="fa fa-check"></i><b>2.3.1</b> Identificando el tipo de objeto</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#características-de-los-objetos"><i class="fa fa-check"></i><b>2.3.2</b> Características de los objetos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#acceder-a-las-partes-de-un-objeto"><i class="fa fa-check"></i><b>2.3.3</b> Acceder a las partes de un objeto</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#sugerencias"><i class="fa fa-check"></i><b>2.3.4</b> Sugerencias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html"><i class="fa fa-check"></i><b>3</b> Conseguir la data</a><ul>
+<li class="chapter" data-level="3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>3.1</b> Directorio de trabajo</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#nuevo-directorio"><i class="fa fa-check"></i><b>3.1.1</b> Nuevo directorio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#github-y-r"><i class="fa fa-check"></i><b>3.2</b> GitHub y R</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-el-programa-git"><i class="fa fa-check"></i><b>3.2.1</b> Instalar el programa GIT</a></li>
+<li class="chapter" data-level="3.2.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-una-cuenta-en-github"><i class="fa fa-check"></i><b>3.2.2</b> Crear una cuenta en GitHub</a></li>
+<li class="chapter" data-level="3.2.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-repositorio"><i class="fa fa-check"></i><b>3.2.3</b> Crear repositorio</a></li>
+<li class="chapter" data-level="3.2.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-github-desktop"><i class="fa fa-check"></i><b>3.2.4</b> Instalar GitHub Desktop</a></li>
+<li class="chapter" data-level="3.2.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#clonar-un-repositorio-de-la-nube-en-mi-disco-local"><i class="fa fa-check"></i><b>3.2.5</b> Clonar un repositorio (de la nube) en mi disco local</a></li>
+<li class="chapter" data-level="3.2.6" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#agregar-cambios-a-la-nube-push"><i class="fa fa-check"></i><b>3.2.6</b> Agregar cambios a la nube (PUSH)</a></li>
+<li class="chapter" data-level="3.2.7" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#descargar-cambios-desde-la-nube-pull"><i class="fa fa-check"></i><b>3.2.7</b> Descargar cambios desde la nube (PULL)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#sugerencias-1"><i class="fa fa-check"></i><b>3.2.8</b> Sugerencias</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#manipular-bases-de-datos"><i class="fa fa-check"></i><b>3.3</b> Manipular bases de datos</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-localmente"><i class="fa fa-check"></i><b>3.3.1</b> Importar localmente</a></li>
+<li class="chapter" data-level="3.3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-desde-la-nube-github"><i class="fa fa-check"></i><b>3.3.2</b> Importar desde la nube (GITHUB)</a></li>
+<li class="chapter" data-level="3.3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#convertir-archivos"><i class="fa fa-check"></i><b>3.3.3</b> Convertir archivos</a></li>
+<li class="chapter" data-level="3.3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#exportar-archivos"><i class="fa fa-check"></i><b>3.3.4</b> Exportar archivos</a></li>
+<li class="chapter" data-level="3.3.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#palabras-clave"><i class="fa fa-check"></i><b>3.3.5</b> Palabras clave</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#web-scrapping"><i class="fa fa-check"></i><b>3.4</b> Web scrapping</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#introducción"><i class="fa fa-check"></i><b>3.4.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.4.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#paso-a-paso"><i class="fa fa-check"></i><b>3.4.2</b> Paso a paso</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preprocesamiento.html"><a href="preprocesamiento.html"><i class="fa fa-check"></i><b>4</b> Preprocesamiento</a><ul>
+<li class="chapter" data-level="4.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#configuración-de-variables"><i class="fa fa-check"></i><b>4.1</b> Configuración de variables</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-a-factor"><i class="fa fa-check"></i><b>4.1.1</b> Convertir a factor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#estructura-de-una-variable"><i class="fa fa-check"></i><b>4.1.2</b> Estructura de una variable</a></li>
+<li class="chapter" data-level="4.1.3" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-en-ordinal"><i class="fa fa-check"></i><b>4.1.3</b> Convertir en ordinal</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#datos-perdidos"><i class="fa fa-check"></i><b>4.2</b> Datos perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html"><i class="fa fa-check"></i><b>5</b> Análisis exploratorio de datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#punto-de-partida"><i class="fa fa-check"></i><b>5.1</b> Punto de partida</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#para-nominales"><i class="fa fa-check"></i><b>5.2</b> Para nominales</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#preparación"><i class="fa fa-check"></i><b>5.2.1</b> Preparación</a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-descriptivos"><i class="fa fa-check"></i><b>5.2.2</b> Estadísticos descriptivos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#gráficos"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Manual de R Studio para ciencias sociales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-un-lenguaje-de-programación" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> R, un lenguaje de programación</h1>
+<div id="entorno-de-programación" class="section level2">
+<h2><span class="header-section-number">2.1</span> Entorno de programación</h2>
+<p>Vamos a comprender por qué es necesario saber un lenguaje de programación para aprender estadística en la ciencias sociales, así como cuál es la lógica que está detrás de las líneas de código.</p>
+<p>Te sugiero ver el siguiente video:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HpXiSLVyYrM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>Para iniciar el uso del R Studio debemos conocer cuáles son sus principales partes (o paneles clave) y cuál es la función de cada una de estas. Dentro de los elementos claves que debemos identificar en el R Studio se encuentran los siguientes:</p>
+<div class="figure">
+<img src="images/1-1.png" alt="" />
+<p class="caption">Principales partes del R Studio</p>
+</div>
+<div id="consola" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Consola</h3>
+<p>Siguiendo nuestra analogía, lo podemos recordar como <strong>nuestra mesa de trabajo</strong>. La consola viene a ser la parte principal de la interfaz. Es la zona donde ingresamos el código y también donde aparecen los resultados de las órdenes que le damos al programa.</p>
+<p>De esta manera, cuando solicitemos, por ejemplo, la media de una variable el resultado nos aparecerá en la consola.</p>
+<div class="figure">
+<img src="images/1-2.jpg" alt="" />
+<p class="caption">Identificando las partes básicas</p>
+</div>
+</div>
+<div id="manuales-del-programador" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Manuales del programador</h3>
+<p>Los <strong>manuales de instrucciones</strong> son archivos de texto en los cuales podemos escribir todos los códigos que deseemos aplicar a un conjunto de objetos.</p>
+<p>La ventaja clave de este tipo de manuales radica en que es un archivo que podemos guardar (con extensión .R) para poder ejecutar los códigos en otro momento. Así también, sirven para que nosotros podamos compartir los procedimientos que hemos seguido para desarrollar una investigación con el fin de que puedan ser replicados (o ejecutados) por otros investigadores.</p>
+<p>Cuando abrimos un manual nos aparece en el cuadrante superior izquierdo de nuestra interfaz del R Studio.</p>
+<p>Los más conocidos son: Script, R Markdown y R Notebook.</p>
+</div>
+<div id="paquetes" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Paquetes</h3>
+<p>Ya tenemos la mesa de trabajo (consola) y el manual (script), ahora necesitamos ubicar las <strong>cajas de herramientas</strong> según lo que deseamos hacer. Los paquetes (también llamados bibliotecas) son colecciones de funciones, generalmente agrupadas para una tarea específico. Podríamos seguir con la analogía, imaginemos que tenemos una caja de herramientas para trabajos eléctricos, otra para carpintería, etc. En el caso del análisis estadístico, podemos tener un paquete que contiene funciones para análisis exploratorio de datos, análisis geoespacial, bioestadística, modelamiento de datos, deeplearning, entre otros temas.</p>
+<p>Cuando nosotros instalamos el R Studio este viene con un conjunto de paquete preinstalados. Esto quiere decir que ya tenemos un grupo de funciones (las más comunes) que podemos solicitar directamente. Sin embargo, a medida que avancemos en el uso del R, nos vamos a dar cuenta que esos paquetes preinstalados no van a ser suficientes.</p>
+<p>Una vez que sabemos qué queremos hacer, debemos instalar los paquetes más adecuados. Para ello, utilizamos la siguiente función:</p>
+<pre><code>install.packages(&quot;nombre_del_paquete&quot;)</code></pre>
+<p>Luego de solicitar la instalación nos aparecerán algunos mensajes en la consola y tenemos que asegurarnos que diga que “el paquete se ha instalado exitosamente”.</p>
+</div>
+<div id="funciones" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Funciones</h3>
+<p>El paso siguiente, una vez ubicada nuestra consola (mesa de trabajo), nuestro script (manual de instrucciones) y el paquete a utilizar (caja de herramientas) , debemos seleccionar la función que necesitemos (la herramienta más idónea).</p>
+<p>Una función es un conjunto de operaciones sistematizadas que el programa ejecuta sobre ciertos argumentos u objetos.</p>
+<p>Para utilizar una función es necesario primero abrir un paquete (al igual que si queremos una herramienta necesitamos abrir primero la caja de herramientas donde se encuentra).</p>
+<p>Para realizar dicha tarea debemos usar la siguiente función:</p>
+<pre><code>library(nombre_del_paquete)</code></pre>
+<p>Esta función lo que hace es abrir el paquete que ya está instalado y dejar a disposición del usuario todas las funciones que se encuentran en el mismo. Luego de ello, ya podemos solicitar la función. Por ejemplo, si queremos realizar un histograma de la variable ingresos debemos escribir:</p>
+<pre><code>hist(ingresos)</code></pre>
+<p>En la línea de comando anterior <code>hist</code> es el nombre de la función que se aplica sobre la variable <code>ingresos</code>.</p>
+<p>Es importante mencionar que en el R el usuario también puede crear sus propias funciones para, por ejemplo, solicitar un conjunto de acciones al programa de forma fácil y con un simple comando. Sin embargo, este punto será desarrollado más adelante.</p>
+</div>
+<div id="objetos" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> Objetos</h3>
+<p>El R es un lenguaje de programación que está orientado a objetos. Esto quiere decir que el programa utiliza las funciones, anteriormente explicadas, sobre elementos que guarda en la memoria activa del computador con un <em>nombre</em> específico. De esta manera, el usuario del programa puede manipular, alterar, modificar estos objetos utilizando operadores o funciones. Podemos ver estos objetos como la madera sobre la cual vamos a aplicar las herramientas que ya tenemos a la mano.</p>
+<p>En nuestro caso el objeto más usual que utilizaremos será los de tipo <code>data.frame</code> o también conocidas como bases de datos. A partir de los cuales podemos seleccionar otros objetos como variables y, a su vez, crear nuevos objetos como tablas, gráficos, modelos, entre otros.</p>
+<p>Todos los objetos que tenemos disponibles en nuestra sesión de R Studio aparecen en nuestra sección de <em>Environment</em>, en el cuadrante superior derecho. Si no aparece ningún objeto eso quiere decir que tenemos que crearlos o, en todo caso, cargarlos al programa.</p>
+<hr />
+</div>
+</div>
+<div id="código-en-r" class="section level2">
+<h2><span class="header-section-number">2.2</span> Código en R</h2>
+<p>Te recomiendo ver el siguiente tutorial:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/y7JPGlw6dJg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div id="script" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Script</h3>
+<p>Ya habíamos comentado en la sección anterior que el Script es una parte muy importante de la interfaz del R Studio y que nos va a ayudar mucho durante nuestro trabajo.</p>
+<p>El Script, el cual es un archivo con extensión .R, es un documento de texto que tiene la peculiaridad que puede ser leídos por el programa como un manual de código. De esa forma, nosotros podemos colocar en el script los códigos de nuestro análisis, ordenarlos, comentarlos y reproducirlos en el R Studio automáticamente.</p>
+<p>En suma, podemos redactar nuestros script, compartirlos con otros investigadores y ejecutarlos.</p>
+<p>Cuando abrimos un Script en el R Studio nos aparece una ventana en la parte superior izquierda de nuestra interfaz. Ahí nosotros podemos comenzar a redactar, como cualquier documento de texto, nuestros códigos. Sin embargo, nosotros podemos agregar información en el Script de dos formas específicas:</p>
+<ol style="list-style-type: decimal">
+<li><p>Como comentario: Cuando nosotros colocamos el símbolo # al iniciar una oración, el Script lo va a identificar como un comentario del programador, como un texto que no va a ser ejecutado como código. Esto es importante porque nos permite ir comentando, por ejemplo, lo que estamos redactando en el documento. Ej: “Este código sirve para abrir un archivo”, “Aquí estoy haciendo un análisis de regresión”, entre otros.</p></li>
+<li><p>Como código: Cuando escribimos directamente en el documento el programa lo va a entender como código o funciones. Esto es importante tenerlo en cuenta para evitar notificaciones de Error.</p></li>
+</ol>
+<p>En resumen: para agregar un comentario ponemos antes el símbolo “#” y para agregar una función escribimos directamente.</p>
+</div>
+<div id="r-markdown" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> R Markdown</h3>
+<p>El <strong>R Markdown</strong> es una sintaxis de formato simple que nos permite elaborar informes de manera rápida y sencilla. Los principales tipos de documentos que podemos elaborar con esta sintaxis son PDF, HTML (para verlo desde un navegador web), Word, entre muchos más.</p>
+<p>Algunas pecualiaridades del documento:</p>
+<p><strong>Incluir texto</strong>: A diferencia del script (en el cual teníamos que decirle al programa qué líneas son comentarios), en el R Markdown podemos redactar directamente sin ningún problema. El R Studio lo va a detectar como texto que forma parte del informe.</p>
+<p><strong>Incluir códigos</strong>: Ahora bien, para incluir código debemos crear los denominados <strong>chunks</strong>. Estos son <em>trozos</em> de código que vamos a agregar a lo largo del texto y que tendrán la particularidad de que serán ejecutados por el programa cuando produzcamos el informe. Por ejemplo, si en nuestro informe queremos incluir el gráfico de la base <em>cars</em> debemos redactar lo siguiente:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-un-lenguaje-de-programación.html#cb4-1"></a><span class="kw">plot</span>(cars)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Para facilitarnos las cosas, el programa nos da una opción, que se encuentra en la parte superior derecha del documento Markdown, que dice <strong>Insert</strong>. Cuando queramos agregar un código de R, simplemente damos click al botón y elegimos “R”.</p>
+<p>Una vez terminemos nuestro informe podemos visualizarlo dando click en el botón <strong>Knit</strong>. Nos daremos cuenta que el programa abrirá un documento HTML (si eso hemos elegido) en una ventana diferente.</p>
+<p>Una particularidad de los R Markdown es que al momento de presionar Knit, este corre TODOS los códigos del documento.</p>
+<p>En general, una forma de verlo es la siguiente: si el Script era un documento de códigos en el cual podíamos agregar textos (usando el #), el R Markdown es un documento/informe de texto en el cual podemos agregar códigos (con los <strong>chunks</strong>).</p>
+</div>
+<div id="r-notebook" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> R Notebook</h3>
+<p>El R Notebook es una variante del R Markdown que se ha introducido recientemente al programa. Tiene las mismas características de un R Markdown en relación al ingreso de información: el texto se ingresa directamente y se tienen que colocar <strong>chunks</strong> para ingresas <em>trozos</em> de código.</p>
+<p>Sin embargo, tiene algunas diferencias que lo hacen peculiarmente interesante a diferencia del R Markdown:</p>
+<ul>
+<li><p>Lo primero es que nos permite ejecutar los códigos <strong>dentro</strong> del mismo documento. Para ello, simplemente ponemos el botón de <strong>Run</strong> que se encuentra en la parte superior derecha (como si fuera un script).</p></li>
+<li><p>Cuando guardamos el R Notebook automáticamente se crea un archivo HTML (en nuestro directorio de trabajo) que contiene el código. Sin embargo, <strong>incluirá sólo las salidas (outputs) que han sido ejecutadas (<em>Run</em>) en el documento</strong>.</p></li>
+<li><p>Nos permite visualizar una <em>Vista Previa</em> con el botón <strong>Preview</strong>. Podemos seleccionar verla en una ventana aparte o dentro del panel visualizador (<strong>Viewer</strong>) dentro de la interfaz del R Studio.</p></li>
+</ul>
+</div>
+</div>
+<div id="clases-de-objetos-en-r" class="section level2">
+<h2><span class="header-section-number">2.3</span> Clases de objetos en R</h2>
+<p>El R es un <strong>lenguaje de programación orientado a objetos</strong>, por ello, es necesario saber con qué clases de objetos podemos encontrarnos.</p>
+<p>Los objetos más básicos en R son los siguientes:</p>
+<ul>
+<li>character: Ej: “rojo”.</li>
+<li>numeric: Ej: 1.5</li>
+<li>integer: Números enteros. Ej: 1L</li>
+<li>logical: Ej: TRUE o FALSE</li>
+<li>complex: Números complejos. Ej: 1+2i</li>
+</ul>
+<p>Ahora bien, uno puede crear <strong>distintas estructuras</strong>, las cuales se pueden formar combinando estos elementos básicos.</p>
+<p>Por ejemplo, la estructura más conocida es el <strong>vector</strong>, el cual es un conjunto de objetos de la misma clase (como si fuese una fila de objetos): sólo caracteres, sólo numéricos, sólo lógicos, etc.</p>
+<div class="figure">
+<img src="images/3-2-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Para los fines de este libro se contemplarán las siguientes estructuras de datos:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo de vector</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vector de factores</td>
+<td>Vector que sirve para representar variables categóricas. Pudiendo ser factores nominales u ordinales. Ej: “costa”, “sierra”, “selva”</td>
+</tr>
+<tr class="even">
+<td>Vectores numéricos</td>
+<td>Vector conformado por la concatenación de números. Ej: 1.5 , 2.7 , 3.1</td>
+</tr>
+<tr class="odd">
+<td>Matrices</td>
+<td>Son hojas de datos homogéneos, es decir, de un sólo tipo. Tiene columnas y filas</td>
+</tr>
+<tr class="even">
+<td>Data frames</td>
+<td>Son hojas de datos, estructuras similares a una matriz; sin embargo, a diferencia de estas pueden almacenar objetos de distintos tipo. <strong>Generalmente nuestras bases de datos son de este tipo</strong> (como una hoja de Excel que tiene variables numéricas, categóricas, etc).</td>
+</tr>
+<tr class="odd">
+<td>Listas</td>
+<td>Conjunto de objetos de distinta clase. Ej: “rojo”, “1”, “lápiz”. Algunas veces las vamos a utilizar a la hora de hacer nuestros cálculos. Tener en cuenta.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recuerda: la clase de un objeto determinará de qué modo será tratado por el programa. El programa está dirigido a objetos y las funciones que están dentro de él también.</strong></p>
+<div id="identificando-el-tipo-de-objeto" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Identificando el tipo de objeto</h3>
+<p>Nosotros podemos identificar la clase de objetos que tenemos mediante la función <code>class()</code>:</p>
+<p>Creamos un vector numérico:</p>
+<pre><code>x= c(1, 2, 3)
+x
+## [1] 1 2 3
+class(x)
+## [1] &quot;numeric&quot;</code></pre>
+<p>Creamos un vector character:</p>
+<pre><code>y=c(&quot;gato&quot;, &quot;perro&quot;, &quot;loro&quot;)
+y
+## [1] &quot;gato&quot;  &quot;perro&quot; &quot;loro&quot;
+class(y)
+## [1] &quot;character&quot;</code></pre>
+<p>Solicitamos que nos muestre el tipo de objeto que es nuestra base de datos de <em>trabajadores</em>:</p>
+<pre><code>head(trabajadores)
+
+##   id sexo    fechnac educ catlab salario_actual salario_inicial antiguedad
+## 1  1    1 1952-02-03   15      3          57000           27000         98
+## 2  2    1 1958-05-23   16      1          40200           18750         98
+## 3  3    0 1929-07-26   12      1          21450           12000         98
+## 4  4    0 1947-04-15    8      1          21900           13200         98
+## 5  5    1 1955-02-09   15      1          45000           21000         98
+## 6  6    1 1958-08-22   15      1          32100           13500         98
+##   experiencia minoría directivo
+## 1         144       0         1
+## 2          36       0         0
+## 3         381       0         0
+## 4         190       0         0
+## 5         138       0         0
+## 6          67       0         0
+
+class(trabajadores)
+## [1] &quot;data.frame&quot;</code></pre>
+<p>De esta manera, le hemos preguntado al programa qué tipo de objeto es <em>trabajadores</em> y nos ha respondido que es un <strong>data.frame</strong>.</p>
+</div>
+<div id="características-de-los-objetos" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Características de los objetos</h3>
+<p>Cada objeto tiene un conjunto de características particulares.</p>
+<p>Por ejemplo, como ya tenemos nuestra base de datos cargada (trabajadores), podemos aplicar un conjunto de funciones para profundizar en sus características.</p>
+<p>Hay muchas formas de conocer la estructura de esta data, sin embargo, sugiero seguir siempre los siguientes pasos:</p>
+<ul>
+<li>Número de columnas y filas tiene nuestra base de datos</li>
+</ul>
+<p>Utilizamos la función <code>dim</code> para ver las dimensiones del archivo:</p>
+<pre><code>dim(ejemplo)
+## [1] 474  11</code></pre>
+<p>El primer número indica las filas (o número de casos) y el segundo el número de columnas (o variables).</p>
+<ul>
+<li>Contenido de la base de datos</li>
+</ul>
+<p>Para ello utilizamos la función <code>names</code> y entre paréntesis ponemos el nombre de nuestra data:</p>
+<pre><code>names(trabajadores)
+
+##  [1] &quot;id&quot;              &quot;sexo&quot;            &quot;fechnac&quot;         &quot;educ&quot;           
+##  [5] &quot;catlab&quot;          &quot;salario_actual&quot;  &quot;salario_inicial&quot; &quot;antiguedad&quot;     
+##  [9] &quot;experiencia&quot;     &quot;minoría&quot;         &quot;directivo&quot;</code></pre>
+<p>De esta manera, nos damos cuenta que la base de datos “trabajadores” tiene 11 variables.</p>
+</div>
+<div id="acceder-a-las-partes-de-un-objeto" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Acceder a las partes de un objeto</h3>
+<p>Como hemos mencionado líneas arriba, hay ocasiones en que un objeto está compuesto por varios elementos a los cuales nosotros también podemos tener acceso.</p>
+<p>Creemos el siguiente objeto:</p>
+<pre><code>x= c(4, 7, 9)
+x
+## [1] 4 7 9</code></pre>
+<p>Ahora solicitemos sólo un elemento de este vector. Ej: solicitemos el segundo componente, para ello hacemos uso de los corchetes []</p>
+<pre><code>x[2]
+
+## [1] 7</code></pre>
+<p>Otra forma de acceder a una parte de un objeto es haciendo uso del símbolo $. Esto va a ser muy útil cuando nos refiramos a, por ejemplo, una variable en específico dentro de una base datos.</p>
+<p>Por ejemplo, el siguiente código solicita la clase del objeto <em>trabajadores</em>, que es nuestra base de datos:</p>
+<pre><code>class(trabajadores)
+## [1] &quot;data.frame&quot;</code></pre>
+<p>Pero si colocamos el símbolo $ luego del nombre de la base y especificamos el nombre de una variable (como salario_inicial) entonces:</p>
+<pre><code>class(trabajadores$salario_actual)
+
+## [1] &quot;numeric&quot;</code></pre>
+<p>Ahora el programa entiende que lo que estamos solicitando es la clase de la variable salario_actual (que se encuentra en la base de datos “trabajadores”). Por ello nos dice que esta variable es de tipo numérico.</p>
+<p><strong>Recuerda: los símbolos más usuales para ingresar a las partes de un objeto son el $ y los [].</strong></p>
+</div>
+<div id="sugerencias" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Sugerencias</h3>
+<p>Para un detalle mayor sobre los objetos en el R revisa este sitio:</p>
+<p>Seong, Tim (2018) <em>Working with R Data Objects</em> Sitio web de RPubs. <a href="https://rpubs.com/tskam/R4DSA-Hands-on_Ex01">Link</a></p>
+<p>También puedes explorar con las siguientes palabras clave:</p>
+<ul>
+<li>Objects in R</li>
+<li>Data structure in R</li>
+<li>Data types in R</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-un-software-libre.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conseguir-la-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/02-tears.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/02-tears.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

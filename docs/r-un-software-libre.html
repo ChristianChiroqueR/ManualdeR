@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-un-software-libre.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="r-un-lenguaje-de-programación.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -225,32 +225,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Manual de R Studio para ciencias sociales</h1>
-<p class="author"><em>Christian Chiroque</em></p>
-<p class="date"><em>2021-04-09</em></p>
+<div id="r-un-software-libre" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> R, un software libre</h1>
+<p>En esta primera parte vamos a aprender los principales elementos para entender el funcionamiento del R y del R Studio.</p>
+<div id="aspectos-básicos" class="section level2">
+<h2><span class="header-section-number">1.1</span> Aspectos básicos</h2>
+<p>En este video vamos a comentar las principales características del R y qué diferencias podemos identificar con otros paquetes estadísticos como el SPSS. Así también, veremos cómo es el procedimiento para la instalación del R y del R Studio.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jLFfC899ZAU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>En resumen podríamos hacer una comparación entre el R y el SPSS para ver sus principales característicass.</p>
+<div class="figure">
+<img src="images/1-1.jpg" alt="" />
+<p class="caption">Image</p>
 </div>
-<div id="presentación" class="section level1 unnumbered">
-<h1>Presentación</h1>
-<p><img src="images/0-1.jpg" /></p>
-<p>Este <code>libro</code> tiene como objetivo ser un soporte para el aprendizaje del software R, a través del IDE R Studio, y está especialmente dirigido para aquellos estudiantes de ciencias sociales, en general, y ciencia política, en particular.</p>
-<p>Lo más resaltante de este manual:</p>
-<ul>
-<li><strong>Presenta de una manera fácil, ordenada y práctica los principales temas en estadística aplicada</strong></li>
-<li><strong>Incorpora material audiovisual al proceso de aprendizaje de estadística en ciencias sociales (videos del canal de Youtube Data Política, creado por el autor de este manual)</strong></li>
-<li><strong>No pretende ser un libro teórico, sino una práctico. Se hará referencia a la teoría en la medida que ayude a tener una idea más clara de lo que se está trabajando en el programa, sin embargo, no es su finalidad principal.</strong></li>
-</ul>
-<p>El presente manual fue una iniciativa personal en el marco de mi labor docente en la Facultad de Ciencias Sociales de la Pontificia Universidad Católica del Perú (cursos Estadística para el Análisis Política 1 y 2).</p>
-<p>Para la construcción de este libro se utilizaron 1) los paquetes de <code>Bookdown</code> y <code>RMarkdown</code> de R Studio; 2) y el programa Git y la plataforma Github para el control de versiones y Github Pages.</p>
-<div id="sobre-el-autor" class="section level2">
-<h2><span class="header-section-number">0.1</span> Sobre el autor</h2>
-<p>Christian Chiroque Ruiz. Politólogo con maestría en Gerencia Social por la Pontificia Universidad Católica del Perú PUCP y especialista en Estadística Aplicada por la Escuela Nacional de Estadística e Informática ENEI. Estudiante de la Maestría de Estadística Aplicada de la Universidad Nacional Agraria La Molina.</p>
-<p>Se desempeña como especialista en gestión social para proyectos de inversión y es docente en la Facultad de Ciencias Sociales de la PUCP.</p>
-<p>Es creador de Data Política (canal de youtube para la difusión de estadística aplicada) y cofundador de Leyendo el Poder (grupo de debate de teorías de ciencia política y estudios internacionales).</p>
 </div>
-<div id="sugerencia-de-citado" class="section level2">
-<h2><span class="header-section-number">0.2</span> Sugerencia de citado</h2>
-<p>Chiroque, Christian (2020) <em>Manual de R Studio para ciencias sociales</em>. Data Política: Lima</p>
+<div id="guía-de-instalación" class="section level2">
+<h2><span class="header-section-number">1.2</span> Guía de instalación</h2>
+<p>Como hemos comentado, primero debemos instalar el R (el software estadístico), el cual lo podemos descargar en el siguiente enlace:</p>
+<p><a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a></p>
+<p>Posteriormente, debemos descargar el R Studio. RStudio es una interfaz, un entorno de desarrollo integrado (IDE) para el lenguaje de programación R, dedicado a la computación estadística y gráficos. Incluye una consola, editor de sintaxis que apoya la ejecución de código, así como herramientas para el trazado, la depuración y la gestión del espacio de trabajo. En otras palabras, es una interfaz que nos facilita la utilización del R y que viene con una serie de elementos para agilizar la programación.</p>
+<p>Se puede descargar en el siguiente enlace (seleccionar opción “Open Source Licence”):</p>
+<p><a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
+<p><strong>El orden es importante. Primero se debe instalar el R y luego el R Studio</strong>.</p>
 
 </div>
 </div>
@@ -259,8 +255,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="r-un-software-libre.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-un-lenguaje-de-programación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +287,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -299,7 +295,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/01-intro.Rmd",
 "text": null
 },
 "download": null,

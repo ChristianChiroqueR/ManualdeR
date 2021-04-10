@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 4 Preprocesamiento | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 4 Preprocesamiento | Manual de R Studio para ciencias sociales" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 4 Preprocesamiento | Manual de R Studio para ciencias sociales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 4 Preprocesamiento | Manual de R Studio para ciencias sociales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-un-software-libre.html"/>
+<link rel="prev" href="conseguir-la-data.html"/>
+<link rel="next" href="análisis-exploratorio-de-datos.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -225,32 +225,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Manual de R Studio para ciencias sociales</h1>
-<p class="author"><em>Christian Chiroque</em></p>
-<p class="date"><em>2021-04-09</em></p>
+<div id="preprocesamiento" class="section level1">
+<h1><span class="header-section-number">Capítulo 4</span> Preprocesamiento</h1>
+<div id="configuración-de-variables" class="section level2">
+<h2><span class="header-section-number">4.1</span> Configuración de variables</h2>
+<p>Ya hemos visto que en el R existen diversos tipos de objetos; sin embargo, cuando realicemos nuestros análisis estadísticos normalmente requeriremos manejar tres tipos de objetos: factores no ordenados (para variables nominales), factores ordenados (para variables ordinales) y vectores numéricos (para variables numéricas).</p>
+<p><strong>PROBLEMA</strong></p>
+<p>Cuando usamos el R Studio es muy usual que, al inicio de la sesión, el programa considere todas las variables como numéricas. Esto puede ser un problema porque, si bien algunas veces existen números en las columnas, estas podrían hacer referencia a variables nominales u ordinales.</p>
+<p>Por ello, es necesario indicarle al programa con qué tipos de variables estamos trabajando.</p>
+<div id="convertir-a-factor" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Convertir a factor</h3>
+<p>Recordemos qué variables tenemos en nuestra base de datos <em>trabajadores</em>:</p>
+<pre><code>names(trabajadores)
+
+##  [1] &quot;id&quot;              &quot;sexo&quot;            &quot;fechnac&quot;         &quot;educ&quot;           
+##  [5] &quot;catlab&quot;          &quot;salario_actual&quot;  &quot;salario_inicial&quot; &quot;antiguedad&quot;     
+##  [9] &quot;experiencia&quot;     &quot;minoría&quot;         &quot;directivo&quot;</code></pre>
+<p>Vamos a solicitar que el R nos diga qué clase de objeto es la variable <em>sexo</em>:</p>
+<pre><code>class(trabajadores$sexo)
+
+## [1] &quot;numeric&quot;</code></pre>
+<p>Nos damos cuenta que para el programa estamos ante una variable numérica (puesto que está codificado). Sin embargo, debemos convertirlo a factor para poder utilizarlo más adelante como variable nominal. Para ello utilizamos la función <code>as.factor()</code> de la siguiente manera:</p>
+<pre><code>trabajadores$sexo = as.factor(trabajadores$sexo)</code></pre>
+<p>Con esto le hemos dicho al programa que convierta a factor la variable sexo y que la imprima con el mismo nombre (es decir que lo reemplace). Para corroborar que hemos cambiado el tipo de vector de forma satisfactoria solicitamos nuevamente la clase de la variable <em>sexo</em>:</p>
+<pre><code>class(trabajadores$sexo)
+
+## [1] &quot;factor&quot;</code></pre>
+<p>Ahora nos damos cuenta que efectivamente ahora la variable <em>sexo</em> es de tipo <strong>factor</strong>.</p>
+<p>Adicionalmente, tenemos que especificar cuál es el significado de cada uno de los niveles del factor (cada categoría). Si solicitamos los niveles de la variable, nos damos cuenta que existen dos niveles: el 0 y el 1.</p>
+<pre><code>levels(trabajadores$sexo)
+
+## [1] &quot;0&quot; &quot;1&quot;</code></pre>
+<p>De acuerdo al manual de la base de datos (metadata) sabemos que 0 equivale a “Hombre” y 1 a “Mujer”. Por ello, le asignamos dichas etiquetas a cada nivel con la función <code>c()</code>:</p>
+<pre><code>levels(trabajadores$sexo)&lt;-c(&quot;Hombre&quot;,&quot;Mujer&quot;)</code></pre>
+<p>Verificamos solicitando nuevamente los niveles de la variable <em>sexo</em>:</p>
+<pre><code>levels(trabajadores$sexo)
+## [1] &quot;Hombre&quot; &quot;Mujer&quot;</code></pre>
+<p><strong>Nota que en el código hemos puesto primero “Hombre” y luego “Mujer”. Esto se debe a que cuando colocamos las etiquetas debemos seguir el orden de los niveles del factor (en este caso 0 y 1)</strong></p>
 </div>
-<div id="presentación" class="section level1 unnumbered">
-<h1>Presentación</h1>
-<p><img src="images/0-1.jpg" /></p>
-<p>Este <code>libro</code> tiene como objetivo ser un soporte para el aprendizaje del software R, a través del IDE R Studio, y está especialmente dirigido para aquellos estudiantes de ciencias sociales, en general, y ciencia política, en particular.</p>
-<p>Lo más resaltante de este manual:</p>
-<ul>
-<li><strong>Presenta de una manera fácil, ordenada y práctica los principales temas en estadística aplicada</strong></li>
-<li><strong>Incorpora material audiovisual al proceso de aprendizaje de estadística en ciencias sociales (videos del canal de Youtube Data Política, creado por el autor de este manual)</strong></li>
-<li><strong>No pretende ser un libro teórico, sino una práctico. Se hará referencia a la teoría en la medida que ayude a tener una idea más clara de lo que se está trabajando en el programa, sin embargo, no es su finalidad principal.</strong></li>
-</ul>
-<p>El presente manual fue una iniciativa personal en el marco de mi labor docente en la Facultad de Ciencias Sociales de la Pontificia Universidad Católica del Perú (cursos Estadística para el Análisis Política 1 y 2).</p>
-<p>Para la construcción de este libro se utilizaron 1) los paquetes de <code>Bookdown</code> y <code>RMarkdown</code> de R Studio; 2) y el programa Git y la plataforma Github para el control de versiones y Github Pages.</p>
-<div id="sobre-el-autor" class="section level2">
-<h2><span class="header-section-number">0.1</span> Sobre el autor</h2>
-<p>Christian Chiroque Ruiz. Politólogo con maestría en Gerencia Social por la Pontificia Universidad Católica del Perú PUCP y especialista en Estadística Aplicada por la Escuela Nacional de Estadística e Informática ENEI. Estudiante de la Maestría de Estadística Aplicada de la Universidad Nacional Agraria La Molina.</p>
-<p>Se desempeña como especialista en gestión social para proyectos de inversión y es docente en la Facultad de Ciencias Sociales de la PUCP.</p>
-<p>Es creador de Data Política (canal de youtube para la difusión de estadística aplicada) y cofundador de Leyendo el Poder (grupo de debate de teorías de ciencia política y estudios internacionales).</p>
+<div id="estructura-de-una-variable" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Estructura de una variable</h3>
+<p>Una forma adicional de corroborar el tipo de vector que tenemos y también ver rápidamente los niveles y los códigos de los mismos es a través del uso de la función <code>str()</code>:</p>
+<pre><code>str(trabajadores$sexo)
+
+##  Factor w/ 2 levels &quot;Hombre&quot;,&quot;Mujer&quot;: 2 2 1 1 2 2 2 1 1 1 ...</code></pre>
+<p>Esta función nos dice que estamos ante un factor de 2 niveles, los cuales han sido etiquetados como “Hombre” y “Mujer”. Finalmente a la derecha aparecen los primeros valores del vector a modo de vista previa.</p>
+<p>Es posible que si aplicamos esta función a otras variables nos salgan más datos:</p>
+<pre><code>str(trabajadores$salario_actual)
+
+##  num [1:474] 57000 40200 21450 21900 45000 ...
+##  - attr(*, &quot;label&quot;)= chr &quot;Salario actual&quot;
+##  - attr(*, &quot;format.spss&quot;)= chr &quot;DOLLAR8&quot;
+##  - attr(*, &quot;display_width&quot;)= int 12
+##  - attr(*, &quot;labels&quot;)= Named num 0
+##   ..- attr(*, &quot;names&quot;)= chr &quot;Ausente&quot;</code></pre>
+<p>Esto se debe a que dentro de la estructura de la variable se le han detallado más componentes (etiqueta, formato, longitud, entre otros); sin embargo, siempre lo más importante para nuestro análisis va a presentarse en la primera línea. En este último ejemplo nos dice que la variable <em>salario_actual</em> es un vector numérico, tiene 474 observaciones y nos muestra los primeros valores como vista previa.</p>
 </div>
-<div id="sugerencia-de-citado" class="section level2">
-<h2><span class="header-section-number">0.2</span> Sugerencia de citado</h2>
-<p>Chiroque, Christian (2020) <em>Manual de R Studio para ciencias sociales</em>. Data Política: Lima</p>
+<div id="convertir-en-ordinal" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Convertir en ordinal</h3>
+<p>Abrimos nuestra base de datos “EDA” desde nuestro repositorio GitHub:</p>
+<pre><code>library(rio)
+link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/eda.sav&quot;
+EDA=import(link)</code></pre>
+<p>Vemos qué variables tenemos en la base de datos:</p>
+<pre><code>names(EDA)
+
+##  [1] &quot;id&quot;        &quot;region&quot;    &quot;consipol&quot;  &quot;edad&quot;      &quot;intecamp&quot;  &quot;intecampR&quot;
+##  [7] &quot;clintpre&quot;  &quot;gorepre&quot;   &quot;gbushpre&quot;  &quot;aborto&quot;    &quot;anonac&quot;    &quot;educ&quot;     
+## [13] &quot;sexo&quot;      &quot;ingresos&quot;  &quot;marital&quot;   &quot;voto96&quot;    &quot;quien96&quot;   &quot;su_ecopas&quot;
+## [19] &quot;clintpst&quot;  &quot;gorepst&quot;   &quot;gbushpst&quot;  &quot;relig&quot;     &quot;voto00&quot;    &quot;confipol&quot; 
+## [25] &quot;confipolR&quot; &quot;consipolR&quot;</code></pre>
+<p>Vamos a trabajar con la variable <em>confipolR</em> la cual hace referencia a <strong>Confianza en la política</strong>. Esta es una variable ordinal en donde: 1 equivale a Baja; 2 equivale a Media; y 3 equivale a Alta.</p>
+<p>Sin embargo, si solicitamos la clase de la variable vemos que es numérica:</p>
+<pre><code>class(EDA$confipolR)
+
+## [1] &quot;numeric&quot;</code></pre>
+<p>Por ello es necesario aplicar la función <code>ordered()</code>. En el siguiente comando le decimos que considere como ordinal a la variable <em>confipolR</em>.</p>
+<pre><code>EDA$confipolR=ordered(EDA$confipolR)</code></pre>
+<p>Corroboramos que hemos dado el formato adecuado solicitando nuevamente la clase del vector y viendo que efectivamente es un factor ordenado:</p>
+<pre><code>class(EDA$confipolR)
+## [1] &quot;ordered&quot; &quot;factor&quot;</code></pre>
+<p>Finalmente, le asignamos las etiquetas a los niveles (Baja, Media y Alta):</p>
+<pre><code>levels(EDA$confipolR)
+## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+levels(EDA$confipolR)&lt;-c(&quot;Baja&quot;,&quot;Media&quot;, &quot;Alta&quot;)
+levels(EDA$confipolR)
+## [1] &quot;Baja&quot;  &quot;Media&quot; &quot;Alta&quot;</code></pre>
+</div>
+</div>
+<div id="datos-perdidos" class="section level2">
+<h2><span class="header-section-number">4.2</span> Datos perdidos</h2>
+<p>Te recomiendo mirar el siguiente tutorial para ver el proceso de identificación de valores perdidos en una base de datos.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g9rWkMz2ELM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
 
 </div>
 </div>
@@ -259,8 +326,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="r-un-software-libre.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="conseguir-la-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-exploratorio-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +358,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/04-prepro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -299,7 +366,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/04-prepro.Rmd",
 "text": null
 },
 "download": null,

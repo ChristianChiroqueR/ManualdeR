@@ -1,0 +1,134 @@
+# Preprocesamiento
+
+## Configuración de variables
+
+Ya hemos visto que en el R existen diversos tipos de objetos; sin embargo, cuando realicemos nuestros análisis estadísticos normalmente requeriremos manejar tres tipos de objetos: factores no ordenados (para variables nominales), factores ordenados (para variables ordinales) y vectores numéricos (para variables numéricas).
+
+**PROBLEMA**
+
+Cuando usamos el R Studio es muy usual que, al inicio de la sesión, el programa considere todas las variables como numéricas. Esto puede ser un problema porque, si bien algunas veces existen números en las columnas, estas podrían hacer referencia a variables nominales u ordinales. 
+
+Por ello, es necesario indicarle al programa con qué tipos de variables estamos trabajando. 
+
+### Convertir a factor
+
+Recordemos qué variables tenemos en nuestra base de datos *trabajadores*: 
+
+    names(trabajadores)
+
+    ##  [1] "id"              "sexo"            "fechnac"         "educ"           
+    ##  [5] "catlab"          "salario_actual"  "salario_inicial" "antiguedad"     
+    ##  [9] "experiencia"     "minoría"         "directivo"
+
+Vamos a solicitar que el R nos diga qué clase de objeto es la variable *sexo*:
+
+    class(trabajadores$sexo)
+
+    ## [1] "numeric"
+
+Nos damos cuenta que para el programa estamos ante una variable numérica (puesto que está codificado). Sin embargo, debemos convertirlo a factor para poder utilizarlo más adelante como variable nominal. Para ello utilizamos la función `as.factor()` de la siguiente manera:
+
+    trabajadores$sexo = as.factor(trabajadores$sexo)
+
+Con esto le hemos dicho al programa que convierta a factor la variable sexo y que la imprima con el mismo nombre (es decir que lo reemplace). Para corroborar que hemos cambiado el tipo de vector de forma satisfactoria solicitamos nuevamente la clase de la variable *sexo*:
+
+    class(trabajadores$sexo)
+
+    ## [1] "factor"
+
+Ahora nos damos cuenta que efectivamente ahora la variable *sexo* es de tipo **factor**.
+
+Adicionalmente, tenemos que especificar cuál es el significado de cada uno de los niveles del factor (cada categoría). Si solicitamos los niveles de la variable, nos damos cuenta que existen dos niveles: el 0 y el 1. 
+
+    levels(trabajadores$sexo)
+
+    ## [1] "0" "1"
+
+De acuerdo al manual de la base de datos (metadata) sabemos que 0 equivale a "Hombre" y 1 a "Mujer". Por ello, le asignamos dichas etiquetas a cada nivel con la función `c()`:
+
+    levels(trabajadores$sexo)<-c("Hombre","Mujer")
+
+Verificamos solicitando nuevamente los niveles de la variable *sexo*:
+
+    levels(trabajadores$sexo)
+    ## [1] "Hombre" "Mujer"
+
+**Nota que en el código hemos puesto primero "Hombre" y luego "Mujer". Esto se debe a que cuando colocamos las etiquetas debemos seguir el orden de los niveles del factor (en este caso 0 y 1)**
+
+
+### Estructura de una variable
+
+Una forma adicional de corroborar el tipo de vector que tenemos y también ver rápidamente los niveles y los códigos de los mismos es a través del uso de la función `str()`:
+
+    str(trabajadores$sexo)
+
+    ##  Factor w/ 2 levels "Hombre","Mujer": 2 2 1 1 2 2 2 1 1 1 ...
+
+Esta función nos dice que estamos ante un factor de 2 niveles, los cuales han sido etiquetados como "Hombre" y "Mujer". Finalmente a la derecha aparecen los primeros valores del vector a modo de vista previa. 
+
+Es posible que si aplicamos esta función a otras variables nos salgan más datos:
+
+    str(trabajadores$salario_actual)
+
+    ##  num [1:474] 57000 40200 21450 21900 45000 ...
+    ##  - attr(*, "label")= chr "Salario actual"
+    ##  - attr(*, "format.spss")= chr "DOLLAR8"
+    ##  - attr(*, "display_width")= int 12
+    ##  - attr(*, "labels")= Named num 0
+    ##   ..- attr(*, "names")= chr "Ausente"
+
+Esto se debe a que dentro de la estructura de la variable se le han detallado más componentes (etiqueta, formato, longitud, entre otros); sin embargo, siempre lo más importante para nuestro análisis va a presentarse en la primera línea. En este último ejemplo nos dice que la variable *salario_actual* es un vector numérico, tiene 474 observaciones y nos muestra los primeros valores como vista previa. 
+
+### Convertir en ordinal
+
+Abrimos nuestra base de datos "EDA" desde nuestro repositorio GitHub:
+
+    library(rio)
+    link="https://github.com/DataPolitica/salidas/raw/master/Data/eda.sav"
+    EDA=import(link)
+
+Vemos qué variables tenemos en la base de datos:
+
+    names(EDA)
+
+    ##  [1] "id"        "region"    "consipol"  "edad"      "intecamp"  "intecampR"
+    ##  [7] "clintpre"  "gorepre"   "gbushpre"  "aborto"    "anonac"    "educ"     
+    ## [13] "sexo"      "ingresos"  "marital"   "voto96"    "quien96"   "su_ecopas"
+    ## [19] "clintpst"  "gorepst"   "gbushpst"  "relig"     "voto00"    "confipol" 
+    ## [25] "confipolR" "consipolR"
+
+Vamos a trabajar con la variable *confipolR* la cual hace referencia a **Confianza en la política**. Esta es una variable ordinal en donde: 1 equivale a Baja; 2 equivale a Media; y 3 equivale a Alta.
+
+Sin embargo, si solicitamos la clase de la variable vemos que es numérica:
+
+    class(EDA$confipolR)
+
+    ## [1] "numeric"
+
+Por ello es necesario aplicar la función `ordered()`. En el siguiente comando le decimos que considere como ordinal a la variable *confipolR*.
+
+    EDA$confipolR=ordered(EDA$confipolR)
+
+Corroboramos que hemos dado el formato adecuado solicitando nuevamente la clase del vector y viendo que efectivamente es un factor ordenado:
+
+    class(EDA$confipolR)
+    ## [1] "ordered" "factor"
+
+Finalmente, le asignamos las etiquetas a los niveles (Baja, Media y Alta):
+
+    levels(EDA$confipolR)
+    ## [1] "1" "2" "3"
+    levels(EDA$confipolR)<-c("Baja","Media", "Alta")
+    levels(EDA$confipolR)
+    ## [1] "Baja"  "Media" "Alta"
+    
+    
+## Datos perdidos
+
+Te recomiendo mirar el siguiente tutorial para ver el proceso de identificación de valores perdidos en una base de datos. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g9rWkMz2ELM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+

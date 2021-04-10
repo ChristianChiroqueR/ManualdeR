@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="preprocesamiento.html"/>
 
-<link rel="next" href="r-un-software-libre.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -225,33 +225,157 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Manual de R Studio para ciencias sociales</h1>
-<p class="author"><em>Christian Chiroque</em></p>
-<p class="date"><em>2021-04-09</em></p>
+<div id="análisis-exploratorio-de-datos" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Análisis exploratorio de datos</h1>
+<div id="punto-de-partida" class="section level2">
+<h2><span class="header-section-number">5.1</span> Punto de partida</h2>
+<p>Como sabemos, los estadísticos de tendencia central van a depender del
+tipo de variable que estemos analizando.</p>
+<p>Para practicar este apartado vamos a utilizar la base de datos de Lapop
+del año 2017. <a href="https://www.vanderbilt.edu/lapop-espanol/">Lapop</a> es el
+Proyecto de Opinión Pública de América Latina implementado por la
+Universidad de Vanderbilt, el cual es un proyecto de investigación
+multinacional especializado en el desarrollo, implementación y análisis
+de encuestas de opinión pública.</p>
+<p>Abrimos la base de datos desde nuestro repositorio:</p>
+<pre><code>library(rio)
+link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/sub_lapop.sav&quot;
+lapop=import(link)</code></pre>
+<p>Esta base de datos ha sido editada con fines didácticos (idioma,
+recodificación, etc).</p>
 </div>
-<div id="presentación" class="section level1 unnumbered">
-<h1>Presentación</h1>
-<p><img src="images/0-1.jpg" /></p>
-<p>Este <code>libro</code> tiene como objetivo ser un soporte para el aprendizaje del software R, a través del IDE R Studio, y está especialmente dirigido para aquellos estudiantes de ciencias sociales, en general, y ciencia política, en particular.</p>
-<p>Lo más resaltante de este manual:</p>
-<ul>
-<li><strong>Presenta de una manera fácil, ordenada y práctica los principales temas en estadística aplicada</strong></li>
-<li><strong>Incorpora material audiovisual al proceso de aprendizaje de estadística en ciencias sociales (videos del canal de Youtube Data Política, creado por el autor de este manual)</strong></li>
-<li><strong>No pretende ser un libro teórico, sino una práctico. Se hará referencia a la teoría en la medida que ayude a tener una idea más clara de lo que se está trabajando en el programa, sin embargo, no es su finalidad principal.</strong></li>
-</ul>
-<p>El presente manual fue una iniciativa personal en el marco de mi labor docente en la Facultad de Ciencias Sociales de la Pontificia Universidad Católica del Perú (cursos Estadística para el Análisis Política 1 y 2).</p>
-<p>Para la construcción de este libro se utilizaron 1) los paquetes de <code>Bookdown</code> y <code>RMarkdown</code> de R Studio; 2) y el programa Git y la plataforma Github para el control de versiones y Github Pages.</p>
-<div id="sobre-el-autor" class="section level2">
-<h2><span class="header-section-number">0.1</span> Sobre el autor</h2>
-<p>Christian Chiroque Ruiz. Politólogo con maestría en Gerencia Social por la Pontificia Universidad Católica del Perú PUCP y especialista en Estadística Aplicada por la Escuela Nacional de Estadística e Informática ENEI. Estudiante de la Maestría de Estadística Aplicada de la Universidad Nacional Agraria La Molina.</p>
-<p>Se desempeña como especialista en gestión social para proyectos de inversión y es docente en la Facultad de Ciencias Sociales de la PUCP.</p>
-<p>Es creador de Data Política (canal de youtube para la difusión de estadística aplicada) y cofundador de Leyendo el Poder (grupo de debate de teorías de ciencia política y estudios internacionales).</p>
-</div>
-<div id="sugerencia-de-citado" class="section level2">
-<h2><span class="header-section-number">0.2</span> Sugerencia de citado</h2>
-<p>Chiroque, Christian (2020) <em>Manual de R Studio para ciencias sociales</em>. Data Política: Lima</p>
+<div id="para-nominales" class="section level2">
+<h2><span class="header-section-number">5.2</span> Para nominales</h2>
+<div id="preparación" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Preparación</h3>
+<p>Selecciones la variable <em>urbanorural</em> y procedemos a configurarla
+adecuadamente.</p>
+<p>Primero identifiquemos cómo el R está leyendo la variable.</p>
+<pre><code>str(lapop$urbanorural)
 
+##  num [1:2153] 2 2 2 2 2 2 2 2 2 2 ...
+##  - attr(*, &quot;label&quot;)= chr &quot;Urbano / Rural&quot;
+##  - attr(*, &quot;format.spss&quot;)= chr &quot;F8.2&quot;
+##  - attr(*, &quot;display_width&quot;)= int 9
+##  - attr(*, &quot;labels&quot;)= Named num [1:2] 1 2
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;Urbano&quot; &quot;Rural&quot;
+
+class(lapop$urbanorural)
+
+## [1] &quot;numeric&quot;</code></pre>
+<p>Luego, al ver que aún se encuentra como <em>numérico</em>, entonces lo
+convertimos en factor:</p>
+<pre><code>lapop$urbanorural=as.factor(lapop$urbanorural)
+class(lapop$urbanorural)
+
+## [1] &quot;factor&quot;</code></pre>
+<p>Verificamos los niveles y, de acuerdo con la metadata, le asignamos las
+etiquetas a cada uno de los mismos.</p>
+<pre><code>levels(lapop$urbanorural)
+
+## [1] &quot;1&quot; &quot;2&quot;
+
+levels(lapop$urbanorural)&lt;-c(&quot;Urbano&quot;,&quot;Rural&quot;)
+levels(lapop$urbanorural)
+
+## [1] &quot;Urbano&quot; &quot;Rural&quot;</code></pre>
+<p>Asimismo, podemos solicitar una tabla que nos muestre las proporciones
+por cada categoría. Para ello, utilizamos la función <code>prop.table()</code>.
+Cuando escribimos esta función hay que tener en cuenta que la tenemos
+que aplicar <em>sobre</em> la tabla de frecuencias normal (que aplicamos
+anteriormente):</p>
+<pre><code>prop.table(table(lapop$urbanorural))
+
+## 
+##    Urbano     Rural 
+## 0.6149559 0.3850441</code></pre>
+<p>Si queremos los porcentaje hacemos lo mismo pero al final le decimos que
+lo multiple por 100 (*100):</p>
+<pre><code>prop.table(table(lapop$urbanorural))*100
+
+## 
+##   Urbano    Rural 
+## 61.49559 38.50441</code></pre>
+<p>Ya tenemos la variable lista para aplicar técnicas de análisis
+descriptivo.</p>
+</div>
+<div id="estadísticos-descriptivos" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Estadísticos descriptivos</h3>
+<p>Lo primero que podemos hacer es solicitar la función <code>summary</code>. Esta
+función nos va a dar una mirada rápida al contenido de nuestra variable.
+En el caso de ser factor, nos va a mostrar las frecuencias (incluye los
+NA si los hubiera):</p>
+<pre><code>summary(lapop$urbanorural)
+
+## Urbano  Rural 
+##   1324    829</code></pre>
+<p>Como sabemos el estadístico más idóneo para variables nominales es la
+moda. Por ello, hacemos uso del paquete <code>DescTools</code> y de la función
+<code>Mode()</code>:</p>
+<pre><code>library(DescTools)
+Mode(lapop$urbanorural)
+
+## [1] Urbano
+## attr(,&quot;freq&quot;)
+## [1] 1324
+## Levels: Urbano Rural</code></pre>
+<p>Lo que nos dice el resultado es que la moda es la categoría <em>Urbano</em> y
+nos indica la frecuencia.</p>
+<p>Otra opción también es solicitar una tabla simple para ver la frecuencia
+de cada categoría.</p>
+<pre><code>table (lapop$urbanorural)
+
+## 
+## Urbano  Rural 
+##   1324    829</code></pre>
+</div>
+<div id="gráficos" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Gráficos</h3>
+<p>Lo primero que podemos solicitar es un diagrama de pie o de sectores.
+Nótese que primero debemos crear un objeto que sea la tabla de la
+variable que deseamos graficar, en este caso, de urbano rural. De esa
+manera, el programa podrá utilizar los datos y plasmarlos en un gráfico.</p>
+<pre><code>mi_tabla &lt;- table(lapop$urbanorural)
+pie(mi_tabla)</code></pre>
+<div class="figure">
+<img src="images/4-1-1.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p><strong>Es recomendable graficar un máximo de 7 sectores. Si colocamos una varaible con más sector puede resultar confusa la interpretación.</strong></p>
+<p>También podemos solicitar un diagrama de barras.</p>
+<pre><code>barplot(mi_tabla)</code></pre>
+<div class="figure">
+<img src="images/4-1-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p><strong>Agregando más detalles a nuestros gráficos</strong></p>
+<p>Hasta este momento hemos visto que podemos solicitar gráficos de una
+forma muy práctica. Sin embargo, nosotros podemos solicitar un producto
+más elaborado en la medida en que agreguemos más características al
+código.</p>
+<p>Por ejemplo, si deseamos un diagrama de barras azul escribimos:</p>
+<pre><code>barplot(mi_tabla, col=&quot;blue&quot;)</code></pre>
+<div class="figure">
+<img src="images/4-1-3.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Si deseamos un diagrama de barras azul y con título escribimos:</p>
+<pre><code>barplot(mi_tabla,col=&quot;blue&quot;, 
+        main=&quot;Casos según su lugar de procedencia&quot;)</code></pre>
+<div class="figure">
+<img src="images/4-1-4.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+<p>Como nos damos cuenta, nosotros podemos ir agregando más características
+a nuestro código. Es posible que recuerdes ejemplos de códigos de
+programación que son líneas interminables. Eso es así porque los
+programadores elaboran productos muy específicos y que, en su mayoría de
+veces, requieren la especificación de muchas características.</p>
+<p>Nuestro objetivo será avanzar en el uso de estos códigos de programación
+para poder, al igual que los programadores, elaborar análisis
+estadísticas cada vez más complejos y específicos.</p>
+
+</div>
 </div>
 </div>
             </section>
@@ -259,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="preprocesamiento.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="r-un-software-libre.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +415,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/05-eda.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -299,7 +423,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/index.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/05-eda.Rmd",
 "text": null
 },
 "download": null,

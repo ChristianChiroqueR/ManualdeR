@@ -1,8 +1,8 @@
-# Primeros pasos
+# R, un software libre
 
 En esta primera parte vamos a aprender los principales elementos para entender el funcionamiento del R y del R Studio.  
 
-## ¿Qué es el R?
+## Aspectos básicos
 
 En este video vamos a comentar las principales características del R y qué diferencias podemos identificar con otros paquetes estadísticos como el SPSS. Así también, veremos cómo es el procedimiento para la instalación del R y del R Studio.
 
@@ -12,7 +12,7 @@ En resumen podríamos hacer una comparación entre el R y el SPSS para ver sus p
 
 ![Image](images/1-1.jpg)
 
-## ¿Cómo se instala en Windows?
+## Guía de instalación
 
 Como hemos comentado, primero debemos instalar el R (el software estadístico), el cual lo podemos descargar en el siguiente enlace:
 
@@ -24,12 +24,5 @@ Se puede descargar en el siguiente enlace (seleccionar opción “Open Source Li
 
 https://rstudio.com/products/rstudio/download/
 
-{{% alert note %}}
-El orden es importante. Primero se debe instalar el **R** y luego el **R Studio**.
-{{% /alert %}}
-
-
-
-
-
+**El orden es importante. Primero se debe instalar el R y luego el R Studio**.
 
