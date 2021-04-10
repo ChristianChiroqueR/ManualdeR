@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 7 Introducciòn a la estadística inferencial | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 7 Introducciòn a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 7 Introducciòn a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 1 R, un software libre | Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 7 Introducciòn a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="r-un-lenguaje-de-programación.html"/>
+<link rel="prev" href="manipulación-con-tidyverse.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -55,70 +55,6 @@
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -228,38 +164,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.3" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html#utilizando-ggplot2-paso-a-paso"><i class="fa fa-check"></i><b>6.1.3</b> Utilizando ggplot2 paso a paso</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html"><i class="fa fa-check"></i><b>7</b> Introducción a la estadística inferencial</a><ul>
-<li class="chapter" data-level="7.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#conceptos-basicos"><i class="fa fa-check"></i><b>7.1</b> Conceptos basicos</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#proceso-de-la-estadística-inferencial"><i class="fa fa-check"></i><b>7.1.1</b> Proceso de la estadística inferencial</a></li>
-<li class="chapter" data-level="7.1.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#métodos-de-estimación"><i class="fa fa-check"></i><b>7.1.2</b> Métodos de estimación</a></li>
-<li class="chapter" data-level="7.1.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#el-rol-de-la-computadoras-y-los-software-estadísticos"><i class="fa fa-check"></i><b>7.1.3</b> El rol de la computadoras y los software estadísticos</a></li>
+<li class="chapter" data-level="7" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html"><i class="fa fa-check"></i><b>7</b> Introducciòn a la estadística inferencial</a><ul>
+<li class="chapter" data-level="7.1" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#conceptos-basicos"><i class="fa fa-check"></i><b>7.1</b> Conceptos basicos</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#proceso-de-la-estadística-inferencial"><i class="fa fa-check"></i><b>7.1.1</b> Proceso de la estadística inferencial</a></li>
+<li class="chapter" data-level="7.1.2" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#métodos-de-estimación"><i class="fa fa-check"></i><b>7.1.2</b> Métodos de estimación</a></li>
+<li class="chapter" data-level="7.1.3" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#el-rol-de-la-computadoras-y-los-software-estadísticos"><i class="fa fa-check"></i><b>7.1.3</b> El rol de la computadoras y los software estadísticos</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.2</b> Intervalos de confianza</a></li>
-<li class="chapter" data-level="7.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> Pruebas de hipótesis</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#supuestos"><i class="fa fa-check"></i><b>7.3.1</b> Supuestos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#hipótesis"><i class="fa fa-check"></i><b>7.3.2</b> Hipótesis</a></li>
-<li class="chapter" data-level="7.3.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#test-estadístico"><i class="fa fa-check"></i><b>7.3.3</b> Test estadístico</a></li>
-<li class="chapter" data-level="7.3.4" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#el-p-valor-p-value"><i class="fa fa-check"></i><b>7.3.4</b> El p-valor (p-value)</a></li>
-<li class="chapter" data-level="7.3.5" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#conclusión"><i class="fa fa-check"></i><b>7.3.5</b> Conclusión</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> Regresión Lineal</a><ul>
-<li class="chapter" data-level="8.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-simple"><i class="fa fa-check"></i><b>8.1</b> Regresión Lineal Simple</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preparación-3"><i class="fa fa-check"></i><b>8.1.1</b> Preparación</a></li>
-<li class="chapter" data-level="8.1.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#cálculo"><i class="fa fa-check"></i><b>8.1.2</b> Cálculo</a></li>
-<li class="chapter" data-level="8.1.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#análisis"><i class="fa fa-check"></i><b>8.1.3</b> Análisis</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-múltiple"><i class="fa fa-check"></i><b>8.2</b> Regresión Lineal Múltiple</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preparación-4"><i class="fa fa-check"></i><b>8.2.1</b> Preparación</a></li>
-<li class="chapter" data-level="8.2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#cálculo-1"><i class="fa fa-check"></i><b>8.2.2</b> Cálculo</a></li>
-<li class="chapter" data-level="8.2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#análisis-1"><i class="fa fa-check"></i><b>8.2.3</b> Análisis</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#verificación-de-supuestos"><i class="fa fa-check"></i><b>8.3</b> Verificación de supuestos</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#linealidad"><i class="fa fa-check"></i><b>8.3.1</b> Linealidad</a></li>
-<li class="chapter" data-level="8.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#normalidad-de-residuos"><i class="fa fa-check"></i><b>8.3.2</b> Normalidad de residuos</a></li>
-<li class="chapter" data-level="8.3.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#homocedasticidad"><i class="fa fa-check"></i><b>8.3.3</b> Homocedasticidad</a></li>
-<li class="chapter" data-level="8.3.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ausencia-de-multicolinealidad"><i class="fa fa-check"></i><b>8.3.4</b> Ausencia de multicolinealidad</a></li>
-<li class="chapter" data-level="8.3.5" data-path="regresión-lineal.html"><a href="regresión-lineal.html#independencia-de-residuos"><i class="fa fa-check"></i><b>8.3.5</b> Independencia de residuos</a></li>
+<li class="chapter" data-level="7.2" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.3" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> Pruebas de hipótesis</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#supuestos"><i class="fa fa-check"></i><b>7.3.1</b> Supuestos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#hipótesis"><i class="fa fa-check"></i><b>7.3.2</b> Hipótesis</a></li>
+<li class="chapter" data-level="7.3.3" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#test-estadístico"><i class="fa fa-check"></i><b>7.3.3</b> Test estadístico</a></li>
+<li class="chapter" data-level="7.3.4" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#el-p-valor-p-value"><i class="fa fa-check"></i><b>7.3.4</b> El p-valor (p-value)</a></li>
+<li class="chapter" data-level="7.3.5" data-path="introducciòn-a-la-estadística-inferencial.html"><a href="introducciòn-a-la-estadística-inferencial.html#conclusión"><i class="fa fa-check"></i><b>7.3.5</b> Conclusión</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -281,29 +198,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-un-software-libre" class="section level1">
-<h1><span class="header-section-number">Capítulo 1</span> R, un software libre</h1>
-<p>En esta primera parte vamos a aprender los principales elementos para entender el funcionamiento del R y del R Studio.</p>
-<div id="aspectos-básicos" class="section level2">
-<h2><span class="header-section-number">1.1</span> Aspectos básicos</h2>
-<p>En este video vamos a comentar las principales características del R y qué diferencias podemos identificar con otros paquetes estadísticos como el SPSS. Así también, veremos cómo es el procedimiento para la instalación del R y del R Studio.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jLFfC899ZAU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<div id="introducciòn-a-la-estadística-inferencial" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> Introducciòn a la estadística inferencial</h1>
+<div id="conceptos-basicos" class="section level2">
+<h2><span class="header-section-number">7.1</span> Conceptos basicos</h2>
+<p><img src="images/6-1-1.jpg" /></p>
+<p>Estos son los conceptos que veremos a lo largo del libro y que serán indispensables para comprender cada uno de los apartados:</p>
+<ul>
+<li><p><strong>Objetivo de la Estadística Inferencial</strong>: Realizar un cálculo de los parámetros poblacionales a partir de data de una muestra representativa.</p></li>
+<li><p><strong>Población</strong>: Conjunto total de individuos u objetos que tienen el mismo conjunto de características (variables) y del cual queremos obtener información.</p></li>
+<li><p><strong>Muestra</strong>: Parte de la población, es obtenida a través de un determinado proceso de muestreo. El objetivo es que sea lo más representativa posible de la población de interés.</p></li>
+<li><p><strong>Parámetro</strong>: Una característica de la población. Ej: el promedio de la edad de todos los individuos de la población.</p></li>
+<li><p><strong>Estadístico</strong>: Una característica de la muestra. Ej: el promedio de la edad de todos los individuos de mi muestra.</p></li>
+</ul>
+<div id="proceso-de-la-estadística-inferencial" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Proceso de la estadística inferencial</h3>
+<p><img src="images/6-1-2.jpg" /></p>
+<p>La estadística implica el estudio de la población a través de una muestra. Esto quiere decir que con la información de un subconjunto de individuos/objetos (estadísticos) vamos a <strong>inferir</strong> las características de toda la población de individuos/objetos (parámetros). En otras palabras, con algunos datos podemos realizar generalizaciones, estimaciones y predicciones para conocer las características de una población en particular.</p>
+<p>Para realizar tal proceso nos valemos de un conjunto de técnicas y estrategias desarrolladas que utilizan cálculos de probabilidades para poder estimar los parámetros.</p>
+<p><strong>Recuerda que la muestra debe ser representativa. No es objetivo de este libro hacer un estudio sobre los métodos de muestreo; sin embargo, debes recordar que sólo el proceso de diseño muestral puede ser un trabajo largo y que requiere mucha rigurosidad. Muchos estudios estadísticos tienen el problema que llegan a conclusiones basados en muestras no representativas.</strong></p>
+</div>
+<div id="métodos-de-estimación" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Métodos de estimación</h3>
+<p>Dentro de la estadística inferencial existen dos métodos de estimación del parámetro (característica de la población): el estimador puntual, la estimación por intervalo.</p>
+<ul>
+<li><strong>El estimador puntual</strong> es cuando nosotros representamos nuestra estimación <strong>utilizando un sólo número</strong>. Por ejemplo: nosotros realizamos una encuesta para saber la aprobación presidencial en el país y obtenemos que un 60% de la muestra aprueba la gestión del presidente. A través de este número (60%) nosotros podríamos hacernos una idea del parámetro (si es que la muestra es representativa).</li>
+</ul>
+<p>Este tipo de estimadores son usados mayormente por los medios de comunicación para problematizar cierto tema; sin embargo, no es una información que nos ayude mucho al final de cuentas.</p>
+<ul>
+<li><strong>Estimación por intervalo</strong>: Es un método que no nos entrega un sólo número sino que nos indica un <strong>intervalo</strong> en el cual se podría encontrar el parámetro población. Este se calcula a partir del estimador puntual y se le agrega un <em>margen de error</em> Ej: siguiendo el ejemplo anterior, este método nos podría indicar que el porcentaje de personas que aprueban la gestión del presidente <strong>en la población</strong> se puede encontrar entre 56% y 64%.</li>
+</ul>
+</div>
+<div id="el-rol-de-la-computadoras-y-los-software-estadísticos" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> El rol de la computadoras y los software estadísticos</h3>
+<p>Como imaginarás, hace algunas décadas todos los cálculos necesarios para realizar análisis estadísticos se realizaban a mano, esto quiere decir que los estadísticos hacían cálculos y todos los procedimientos por ellos mismo utilizando lápiz y papel.</p>
+<p><img src="images/6-1-3.jpg" /></p>
+<p>Sin embargo, gracias al avance tecnológicos hoy día tenemos las computadoras y los software estadísticos (como el R, SPSS, Stata, entre otros) que hacen los cálculos complejos por nosotros y nos brindan los resultados en muy poco tiempo.</p>
+<p>Esto, si bien es muy útil y obviamente alivia de un trabajo complejo al investigador, también ha ocasionado que muchas personas utilicen el software de forma poco rigurosa, llegando a conclusiones que muchas veces no guardan relación con la teoría que está detrás del cálculo.</p>
+<p>Por ello, antes de entrar a uno de los temas a ver aquí serán importantes dos pasos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Revisar adecuadamente la base teórica de los métodos de estadística inferencial a utilizar. Esto permitirá saber qué es lo que estamos haciendo y para qué.</p></li>
+<li><p>Revisar las funciones que utilizaremos: Estamos usando el R y en este programa, como comentamos anteriormente, hay muchas formas de llegar al mismo punto y hay muchos paquetes (y funciones) que nos permiten hacer lo mismo. Sin embargo, cada una de estas tienen ciertas particularidades que fueron diseñadas por sus creadores (recordemos que R es un software libre y las funciones son creadas por una comunidad de usuarios), por ello, es necesario saber bien qué hacen las funciones que aplicamos y cuáles son sus características.</p></li>
+</ol>
+</div>
+</div>
+<div id="intervalos-de-confianza" class="section level2">
+<h2><span class="header-section-number">7.2</span> Intervalos de confianza</h2>
+<p>Te recomiendo ver el siguiente tutorial para el cálculo de intervalos de confianza en el R Studio:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WZimlAIzza0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
-<p>En resumen podríamos hacer una comparación entre el R y el SPSS para ver sus principales característicass.</p>
+</div>
+<div id="pruebas-de-hipótesis" class="section level2">
+<h2><span class="header-section-number">7.3</span> Pruebas de hipótesis</h2>
+<p>Luego de los intervalos de confianza, las pruebas de hipótesis son los métodos más utilizados para realizar inferencia estadística. Estas pruebas se basan en el uso de las probabilidades para realizar sus cálculos.</p>
+<p>El objetivo final es verificar qué tan probable es que una <strong>hipótesis</strong> sobre la población sea cierta. . Resume evidencia para averiguar si una hipótesis es probable.</p>
+<p><strong>Recuerda una hipótesis es una afirmación sobre la población. Usualmente presentado como la atribución de una característica al parámetro poblacional.</strong></p>
+<p>Las pruebas de hipótesis tienen 5 pasos bien definidos:</p>
+<p><img src="images/6-3-1.jpg" /></p>
+<div id="supuestos" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Supuestos</h3>
+<p>Cada prueba de hipótesis tiene ciertas condiciones en las cuales se puede aplicar.</p>
+<p>Uno de los supuestos principales requeridos es que el proceso de muestreo (recojo de información) haya sido realizado de forma aleatoria.</p>
 <div class="figure">
-<img src="images/1-1.jpg" alt="" />
+<img src="images/6-3-2.jpg" alt="" />
 <p class="caption">Image</p>
 </div>
+<p>El segundo supuesto más recurrente es que la variable a utilizar tenga distribución normal. Gracias al teorema del límite central, con N grande (mayor a 121) podemos asumir normalidad</p>
 </div>
-<div id="guía-de-instalación" class="section level2">
-<h2><span class="header-section-number">1.2</span> Guía de instalación</h2>
-<p>Como hemos comentado, primero debemos instalar el R (el software estadístico), el cual lo podemos descargar en el siguiente enlace:</p>
-<p><a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a></p>
-<p>Posteriormente, debemos descargar el R Studio. RStudio es una interfaz, un entorno de desarrollo integrado (IDE) para el lenguaje de programación R, dedicado a la computación estadística y gráficos. Incluye una consola, editor de sintaxis que apoya la ejecución de código, así como herramientas para el trazado, la depuración y la gestión del espacio de trabajo. En otras palabras, es una interfaz que nos facilita la utilización del R y que viene con una serie de elementos para agilizar la programación.</p>
-<p>Se puede descargar en el siguiente enlace (seleccionar opción “Open Source Licence”):</p>
-<p><a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
-<p><strong>El orden es importante. Primero se debe instalar el R y luego el R Studio</strong>.</p>
+<div id="hipótesis" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> Hipótesis</h3>
+<p>Cada prueba de medias tiene dos hipótesis sobre la población: la hipótesis nula y la hipótesis alternativa.</p>
+<p>Nosotros vamos a poner a prueba la hipótesis nula (H0) mediante la recolección de evidencia en los datos encontrados en la muestra que anteriormente hemos recogido (o nos han entregado).</p>
+<p>Algunos ejemplos de hipótesis según el objetivo de la prueba:</p>
+<p><img src="images/6-3-3.jpg" /></p>
+</div>
+<div id="test-estadístico" class="section level3">
+<h3><span class="header-section-number">7.3.3</span> Test estadístico</h3>
+<p>Son el instrumento para validar o rechazar las hipótesis. Ellos tratan de distinguir lo que es plausible de lo que es muy poco verosímil, en el marco de un objetivo dado.</p>
+<p>Existen diversos test estadísticos dependiendo del objetivo del investigador: Pruebas T (comparación de media en dos grupos), Anova de un factor (comparación de medias en más de dos grupos), Chi cuadrado (asociación), entre los más resaltantes.</p>
+</div>
+<div id="el-p-valor-p-value" class="section level3">
+<h3><span class="header-section-number">7.3.4</span> El p-valor (p-value)</h3>
+<p>Es una medición estadística que va de 0 a 1. Se usa para el contraste de hipótesis.</p>
+<p>Si cumple con la condición de ser menor al nivel de significancia (alpha = 0.05 a un 95% de confianza) impuesto arbitrariamente, entonces la hipótesis nula será, eventualmente, rechazada.</p>
+<p>El p-valor es un número que veremos en todos nuestros análisis a lo largo de este manual. Si bien la explicación de tal término está relacionada a un conjunto de elementos teóricos de estadística, puedes ver el siguiente video que te permitirá tener una idea general de para qué sirve este número.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ibmjzFv4K1Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="conclusión" class="section level3">
+<h3><span class="header-section-number">7.3.5</span> Conclusión</h3>
+<p>Hasta este punto hemos obtenido un conjunto de números en nuestros calculos. Ahora la parte más importante es la interpretación de esos números.</p>
+<p>Es muy usual que un estudiante realice todos los pasos anteriores de forma eficiente pero tenga problemas al momento de generar conclusiones. Como dijimos, la finalidad de la estadística inferencial es establecer conclusiones sobre la población, por ello, estas deben ser presentadas de forma clara y rigurosa.</p>
+<p>Para ello, debemos seguir el siguiente flujograma:</p>
+<p><img src="images/6-3-4.jpg" /></p>
+<p>Una vez que sabemos el valor de significancia (p-valor) y si rechazamos o no rechazamos la hipótesis nula, vamos a redactar nuestra conclusión. Para ello es necesario incorporar los siguiente elementos en el fraseo: nombre de la prueba, resultado del p valor, si rechazamos o no rechazamos la hipótesis nula, y la idea o conclusión final.</p>
+<p>Ejemplo: Estamos ante una Prueba T de comparación de medias de la variable <em>Ingreso</em> en hombres y mujeres, cuya hipótesis nula es que “Las medias son iguales en los dos grupos analizados” y el p-valor que obtuvimos es 0.03. Con estos insumos redactamos:</p>
+<p>Luego de realizar la <strong>Prueba T</strong> y de acuerdo al <strong>p-valor obtenido (0.03)</strong>, podemos <strong>rechazar</strong> la hipótesis nula de que <strong>las medias de la variable Ingreso son iguales en los dos grupos analizados (hombres y mujeres)</strong> y concluir que <strong>las medias son diferentes</strong> en ambos grupos poblacionales.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -311,8 +303,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-un-lenguaje-de-programación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="manipulación-con-tidyverse.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -343,7 +335,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/01-intro.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/07-inf.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -351,7 +343,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/01-intro.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/07-inf.Rmd",
 "text": null
 },
 "download": null,

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Regresión Lineal | Manual de R Studio para ciencias sociales" />
+  
+  
+  
+
+<meta name="author" content="Christian Chiroque" />
+
+
+<meta name="date" content="2021-04-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción-a-la-estadística-inferencial.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Política</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Presentación</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#sobre-el-autor"><i class="fa fa-check"></i><b>0.1</b> Sobre el autor</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#sugerencia-de-citado"><i class="fa fa-check"></i><b>0.2</b> Sugerencia de citado</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html"><i class="fa fa-check"></i><b>1</b> R, un software libre</a><ul>
+<li class="chapter" data-level="1.1" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#aspectos-básicos"><i class="fa fa-check"></i><b>1.1</b> Aspectos básicos</a></li>
+<li class="chapter" data-level="1.2" data-path="r-un-software-libre.html"><a href="r-un-software-libre.html#guía-de-instalación"><i class="fa fa-check"></i><b>1.2</b> Guía de instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html"><i class="fa fa-check"></i><b>2</b> R, un lenguaje de programación</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#entorno-de-programación"><i class="fa fa-check"></i><b>2.1</b> Entorno de programación</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#consola"><i class="fa fa-check"></i><b>2.1.1</b> Consola</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#manuales-del-programador"><i class="fa fa-check"></i><b>2.1.2</b> Manuales del programador</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#paquetes"><i class="fa fa-check"></i><b>2.1.3</b> Paquetes</a></li>
+<li class="chapter" data-level="2.1.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#funciones"><i class="fa fa-check"></i><b>2.1.4</b> Funciones</a></li>
+<li class="chapter" data-level="2.1.5" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#objetos"><i class="fa fa-check"></i><b>2.1.5</b> Objetos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#código-en-r"><i class="fa fa-check"></i><b>2.2</b> Código en R</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#script"><i class="fa fa-check"></i><b>2.2.1</b> Script</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-markdown"><i class="fa fa-check"></i><b>2.2.2</b> R Markdown</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#r-notebook"><i class="fa fa-check"></i><b>2.2.3</b> R Notebook</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#clases-de-objetos-en-r"><i class="fa fa-check"></i><b>2.3</b> Clases de objetos en R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#identificando-el-tipo-de-objeto"><i class="fa fa-check"></i><b>2.3.1</b> Identificando el tipo de objeto</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#características-de-los-objetos"><i class="fa fa-check"></i><b>2.3.2</b> Características de los objetos</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#acceder-a-las-partes-de-un-objeto"><i class="fa fa-check"></i><b>2.3.3</b> Acceder a las partes de un objeto</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-un-lenguaje-de-programación.html"><a href="r-un-lenguaje-de-programación.html#sugerencias"><i class="fa fa-check"></i><b>2.3.4</b> Sugerencias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html"><i class="fa fa-check"></i><b>3</b> Conseguir la data</a><ul>
+<li class="chapter" data-level="3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>3.1</b> Directorio de trabajo</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#nuevo-directorio"><i class="fa fa-check"></i><b>3.1.1</b> Nuevo directorio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#github-y-r"><i class="fa fa-check"></i><b>3.2</b> GitHub y R</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-el-programa-git"><i class="fa fa-check"></i><b>3.2.1</b> Instalar el programa GIT</a></li>
+<li class="chapter" data-level="3.2.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-una-cuenta-en-github"><i class="fa fa-check"></i><b>3.2.2</b> Crear una cuenta en GitHub</a></li>
+<li class="chapter" data-level="3.2.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#crear-repositorio"><i class="fa fa-check"></i><b>3.2.3</b> Crear repositorio</a></li>
+<li class="chapter" data-level="3.2.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#instalar-github-desktop"><i class="fa fa-check"></i><b>3.2.4</b> Instalar GitHub Desktop</a></li>
+<li class="chapter" data-level="3.2.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#clonar-un-repositorio-de-la-nube-en-mi-disco-local"><i class="fa fa-check"></i><b>3.2.5</b> Clonar un repositorio (de la nube) en mi disco local</a></li>
+<li class="chapter" data-level="3.2.6" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#agregar-cambios-a-la-nube-push"><i class="fa fa-check"></i><b>3.2.6</b> Agregar cambios a la nube (PUSH)</a></li>
+<li class="chapter" data-level="3.2.7" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#descargar-cambios-desde-la-nube-pull"><i class="fa fa-check"></i><b>3.2.7</b> Descargar cambios desde la nube (PULL)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#sugerencias-1"><i class="fa fa-check"></i><b>3.2.8</b> Sugerencias</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#manipular-bases-de-datos"><i class="fa fa-check"></i><b>3.3</b> Manipular bases de datos</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-localmente"><i class="fa fa-check"></i><b>3.3.1</b> Importar localmente</a></li>
+<li class="chapter" data-level="3.3.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#importar-desde-la-nube-github"><i class="fa fa-check"></i><b>3.3.2</b> Importar desde la nube (GITHUB)</a></li>
+<li class="chapter" data-level="3.3.3" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#convertir-archivos"><i class="fa fa-check"></i><b>3.3.3</b> Convertir archivos</a></li>
+<li class="chapter" data-level="3.3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#exportar-archivos"><i class="fa fa-check"></i><b>3.3.4</b> Exportar archivos</a></li>
+<li class="chapter" data-level="3.3.5" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#palabras-clave"><i class="fa fa-check"></i><b>3.3.5</b> Palabras clave</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#web-scrapping"><i class="fa fa-check"></i><b>3.4</b> Web scrapping</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#introducción"><i class="fa fa-check"></i><b>3.4.1</b> Introducción</a></li>
+<li class="chapter" data-level="3.4.2" data-path="conseguir-la-data.html"><a href="conseguir-la-data.html#paso-a-paso"><i class="fa fa-check"></i><b>3.4.2</b> Paso a paso</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preprocesamiento.html"><a href="preprocesamiento.html"><i class="fa fa-check"></i><b>4</b> Preprocesamiento</a><ul>
+<li class="chapter" data-level="4.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#configuración-de-variables"><i class="fa fa-check"></i><b>4.1</b> Configuración de variables</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-a-factor"><i class="fa fa-check"></i><b>4.1.1</b> Convertir a factor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#estructura-de-una-variable"><i class="fa fa-check"></i><b>4.1.2</b> Estructura de una variable</a></li>
+<li class="chapter" data-level="4.1.3" data-path="preprocesamiento.html"><a href="preprocesamiento.html#convertir-en-ordinal"><i class="fa fa-check"></i><b>4.1.3</b> Convertir en ordinal</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="preprocesamiento.html"><a href="preprocesamiento.html#datos-perdidos"><i class="fa fa-check"></i><b>4.2</b> Datos perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html"><i class="fa fa-check"></i><b>5</b> Análisis exploratorio de datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#para-nominales"><i class="fa fa-check"></i><b>5.1</b> Para nominales</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#preparación"><i class="fa fa-check"></i><b>5.1.1</b> Preparación</a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-descriptivos"><i class="fa fa-check"></i><b>5.1.2</b> Estadísticos descriptivos</a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#gráficos"><i class="fa fa-check"></i><b>5.1.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#para-ordinales"><i class="fa fa-check"></i><b>5.2</b> Para ordinales</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#preparación-1"><i class="fa fa-check"></i><b>5.2.1</b> Preparación</a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-descriptivos-1"><i class="fa fa-check"></i><b>5.2.2</b> Estadísticos descriptivos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#gráficos-1"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#para-numéricas"><i class="fa fa-check"></i><b>5.3</b> Para numéricas</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#preparación-2"><i class="fa fa-check"></i><b>5.3.1</b> Preparación</a></li>
+<li class="chapter" data-level="5.3.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-descriptivos-2"><i class="fa fa-check"></i><b>5.3.2</b> Estadísticos descriptivos</a></li>
+<li class="chapter" data-level="5.3.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#estadísticos-de-dispersión"><i class="fa fa-check"></i><b>5.3.3</b> Estadísticos de dispersión</a></li>
+<li class="chapter" data-level="5.3.4" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#gráficos-2"><i class="fa fa-check"></i><b>5.3.4</b> Gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#análisis-bivariado"><i class="fa fa-check"></i><b>5.4</b> Análisis bivariado</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#tablas-de-contingencia"><i class="fa fa-check"></i><b>5.4.1</b> Tablas de contingencia</a></li>
+<li class="chapter" data-level="5.4.2" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#una-numérica-y-una-categórica"><i class="fa fa-check"></i><b>5.4.2</b> Una numérica y una categórica</a></li>
+<li class="chapter" data-level="5.4.3" data-path="análisis-exploratorio-de-datos.html"><a href="análisis-exploratorio-de-datos.html#dos-variables-numéricas"><i class="fa fa-check"></i><b>5.4.3</b> Dos variables numéricas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html"><i class="fa fa-check"></i><b>6</b> Manipulación con Tidyverse</a><ul>
+<li class="chapter" data-level="6.1" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html#gráficos-con-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Gráficos con ggplot2</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html#introducción-1"><i class="fa fa-check"></i><b>6.1.1</b> Introducción</a></li>
+<li class="chapter" data-level="6.1.2" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html#estructura-del-código"><i class="fa fa-check"></i><b>6.1.2</b> Estructura del código</a></li>
+<li class="chapter" data-level="6.1.3" data-path="manipulación-con-tidyverse.html"><a href="manipulación-con-tidyverse.html#utilizando-ggplot2-paso-a-paso"><i class="fa fa-check"></i><b>6.1.3</b> Utilizando ggplot2 paso a paso</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html"><i class="fa fa-check"></i><b>7</b> Introducción a la estadística inferencial</a><ul>
+<li class="chapter" data-level="7.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#conceptos-basicos"><i class="fa fa-check"></i><b>7.1</b> Conceptos basicos</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#proceso-de-la-estadística-inferencial"><i class="fa fa-check"></i><b>7.1.1</b> Proceso de la estadística inferencial</a></li>
+<li class="chapter" data-level="7.1.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#métodos-de-estimación"><i class="fa fa-check"></i><b>7.1.2</b> Métodos de estimación</a></li>
+<li class="chapter" data-level="7.1.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#el-rol-de-la-computadoras-y-los-software-estadísticos"><i class="fa fa-check"></i><b>7.1.3</b> El rol de la computadoras y los software estadísticos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> Pruebas de hipótesis</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#supuestos"><i class="fa fa-check"></i><b>7.3.1</b> Supuestos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#hipótesis"><i class="fa fa-check"></i><b>7.3.2</b> Hipótesis</a></li>
+<li class="chapter" data-level="7.3.3" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#test-estadístico"><i class="fa fa-check"></i><b>7.3.3</b> Test estadístico</a></li>
+<li class="chapter" data-level="7.3.4" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#el-p-valor-p-value"><i class="fa fa-check"></i><b>7.3.4</b> El p-valor (p-value)</a></li>
+<li class="chapter" data-level="7.3.5" data-path="introducción-a-la-estadística-inferencial.html"><a href="introducción-a-la-estadística-inferencial.html#conclusión"><i class="fa fa-check"></i><b>7.3.5</b> Conclusión</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> Regresión Lineal</a><ul>
+<li class="chapter" data-level="8.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-simple"><i class="fa fa-check"></i><b>8.1</b> Regresión Lineal Simple</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preparación-3"><i class="fa fa-check"></i><b>8.1.1</b> Preparación</a></li>
+<li class="chapter" data-level="8.1.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#cálculo"><i class="fa fa-check"></i><b>8.1.2</b> Cálculo</a></li>
+<li class="chapter" data-level="8.1.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#análisis"><i class="fa fa-check"></i><b>8.1.3</b> Análisis</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#regresión-lineal-múltiple"><i class="fa fa-check"></i><b>8.2</b> Regresión Lineal Múltiple</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#preparación-4"><i class="fa fa-check"></i><b>8.2.1</b> Preparación</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#cálculo-1"><i class="fa fa-check"></i><b>8.2.2</b> Cálculo</a></li>
+<li class="chapter" data-level="8.2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#análisis-1"><i class="fa fa-check"></i><b>8.2.3</b> Análisis</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#verificación-de-supuestos"><i class="fa fa-check"></i><b>8.3</b> Verificación de supuestos</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#linealidad"><i class="fa fa-check"></i><b>8.3.1</b> Linealidad</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#normalidad-de-residuos"><i class="fa fa-check"></i><b>8.3.2</b> Normalidad de residuos</a></li>
+<li class="chapter" data-level="8.3.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#homocedasticidad"><i class="fa fa-check"></i><b>8.3.3</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="8.3.4" data-path="regresión-lineal.html"><a href="regresión-lineal.html#ausencia-de-multicolinealidad"><i class="fa fa-check"></i><b>8.3.4</b> Ausencia de multicolinealidad</a></li>
+<li class="chapter" data-level="8.3.5" data-path="regresión-lineal.html"><a href="regresión-lineal.html#independencia-de-residuos"><i class="fa fa-check"></i><b>8.3.5</b> Independencia de residuos</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Manual de R Studio para ciencias sociales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regresión-lineal" class="section level1">
+<h1><span class="header-section-number">Capítulo 8</span> Regresión Lineal</h1>
+<div id="regresión-lineal-simple" class="section level2">
+<h2><span class="header-section-number">8.1</span> Regresión Lineal Simple</h2>
+<p>Te sugiero revisar el siguiente tutorial para el cálculo de un modelo de regresión simple en {{&lt; icon name=“r-project” pack=“fab” &gt;}}:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-p02G7NXlSk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div id="preparación-3" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Preparación</h3>
+<pre><code>library(rio)
+base_trabajadores=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav&quot;
+trabajadores=import(base_trabajadores)
+attach(trabajadores)
+
+names(trabajadores)
+
+##  [1] &quot;id&quot;              &quot;sexo&quot;            &quot;fechnac&quot;         &quot;educ&quot;           
+##  [5] &quot;catlab&quot;          &quot;salario_actual&quot;  &quot;salario_inicial&quot; &quot;antiguedad&quot;     
+##  [9] &quot;experiencia&quot;     &quot;minoría&quot;         &quot;directivo&quot;</code></pre>
+<p><strong>Solicitamos un diagrama de dispersión</strong></p>
+<p>En este caso vamos a seleccionar las dos variables (el salario inicial y salario final) y solicitar un diagrama de dispersión.</p>
+<pre><code>plot(salario_actual~salario_inicial)</code></pre>
+<p><img src="images/7-1-1.jpg" /></p>
+<p>Como vemos en el diagrama, podemos ver una línea fácilmente. Ello es un buen indicio de que ambas variables están correlacionadas linealmente; sin embargo, es necesario realizar el test estadístico de correlación para poder tener una mirada más fina.</p>
+<p><strong>Solicitamos el test de correlación</strong></p>
+<p>Para realizar el test de correlación necesitamos utilizar la función <code>cor.test</code>. Colocamos las variables de interés entre el paréntesis separado por una coma y lo solitiamos.</p>
+<pre><code>cor.test(salario_actual,salario_inicial)
+
+## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  salario_actual and salario_inicial
+## t = 40.276, df = 472, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.8580696 0.8989267
+## sample estimates:
+##       cor 
+## 0.8801175</code></pre>
+<p><strong>En este caso hemos solicitado el R de Pearson como el test de correlación. Sin embargo, si la variable no posee una distribución normal sería más adecuado aplicar el Test de Spearman (método no paramétrico).</strong></p>
+</div>
+<div id="cálculo" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Cálculo</h3>
+<p>Para calcular un modelo de regresión debemos utilizar la función <code>lm()</code>. Dentro de los paréntesis colocamos las variables de la siguiente manera: variable_dependiente ~ variable_independiente. Al modelo le vamos a llamar <em>modelo1</em>:</p>
+<pre><code>modelo1=lm(salario_actual~salario_inicial,data=trabajadores)</code></pre>
+<p>Luego de ello, podemos darnos cuenta que en nuestra sección de objetos (cuadrante superior derecho) ya figura el modelo1. Para solicitar los resultados colocamos la función <code>summary(modelo1)</code></p>
+<pre><code>summary(modelo1)
+
+## 
+## Call:
+## lm(formula = salario_actual ~ salario_inicial, data = trabajadores)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -35424  -4031  -1154   2584  49293 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     1.928e+03  8.887e+02    2.17   0.0305 *  
+## salario_inicial 1.909e+00  4.741e-02   40.28   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8115 on 472 degrees of freedom
+## Multiple R-squared:  0.7746, Adjusted R-squared:  0.7741 
+## F-statistic:  1622 on 1 and 472 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Luego de ello seguimos los pasos de nuestro flujograma:</p>
+<div class="figure">
+<img src="images/7-1-2.jpg" alt="" />
+<p class="caption">Image</p>
+</div>
+</div>
+<div id="análisis" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> Análisis</h3>
+<div id="comprobar-si-nuestro-modelo-es-válido" class="section level4">
+<h4><span class="header-section-number">8.1.3.1</span> Comprobar si nuestro modelo es válido</h4>
+<p>Para ello, necesitamos ver la tabla ANOVA, vale decir, las últimas líneas de nuestro output del <em>modelo1</em>.</p>
+<p>Recordemos que estamos realizando una prueba de hipótesis, en la cual nuestras hipótesis son las siguientes:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Hipótesis nula (H0)</th>
+<th>Hipótesis alterna (Ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>El modelo no es válido</td>
+<td>El modelo es válido</td>
+</tr>
+</tbody>
+</table>
+<p>Entonces leemos el p-valor. Como en este caso obtuvimos un p valor de &lt;2.2e-16 entonces podemos ver que es menor a 0.05 (alpha), rechazamos la hipótesis nula y concluimos que <strong>nuestro modelo es válido</strong>.</p>
+</div>
+<div id="capacidad-explicativa-del-modelo" class="section level4">
+<h4><span class="header-section-number">8.1.3.2</span> Capacidad explicativa del modelo</h4>
+<p>Para ello, debemos ver el valor del R2 ajustado. En este caso lo interpretamos de la siguiente manera:</p>
+<p><img src="images/7-1-3.jpg" /></p>
+<p>En este caso, al tener un R2 ajustado de 0.7741 podemos concluir que nuestro modelo explica el 77.41% de la variabilidad de la dependiente (en este caso, salario actual)</p>
+</div>
+<div id="verificar-si-la-variable-x-aporta-al-modelo" class="section level4">
+<h4><span class="header-section-number">8.1.3.3</span> Verificar si la variable X aporta al modelo</h4>
+<p>El siguiente paso, luego de ver si nuestro modelo es válido y su capacidad explicativa, debemos ver si efectivamente nuestra variable explicativa aporta al modelo. Para ello, debemos visualizar nuestra tabla de coeficientes y analizar la línea que corresponde a la variable de nuestro interés.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Hipótesis nula (H0)</th>
+<th>Hipótesis alterna (Ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>La variable X no aporta al modelo</td>
+<td>La variable X aporta al modelo</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso, el pvalor de <em>salario_inicial</em> nos salió &lt;2e-16 ***. Por ello, al ser menor que 0.05, rechazamos nuestra hipótesis nula (la variable no aporta al modelo) y concluimos que efectívamente sí aporta al modelo de regresión lineal simple.</p>
+<p>Nótese que el pvalor ha venido acompañado de los tres asteriscos o estrellas. Ello indica que el grado de significancia es muy alto.</p>
+</div>
+<div id="identificando-los-coeficientes-y-construyendo-la-ecuación" class="section level4">
+<h4><span class="header-section-number">8.1.3.4</span> Identificando los coeficientes y construyendo la ecuación</h4>
+<p>Para ello, debemos ver nuevamente la tabla de coeficiente, la línea que corresponde a nuestra variable explicativa. En esta tenemos que prestar atención al número que figura en la columna <em>Estimate</em>.</p>
+<p>No obstante, siempre sugiero solicitar el siguiente código para así evitar errores en la lectura del coeficiente:</p>
+<pre><code>modelo1$coefficients
+
+##     (Intercept) salario_inicial 
+##      1928.20576         1.90945</code></pre>
+<p>Con este código le hemos dicho al programa que nos muestre los coeficientes del modelo 1. Por ello, al ser una regresión lineal simple, tenemos dos números: el intercepto y el coeficiente del salario inicial.</p>
+<p>Vemos que el coeficiente del salario inicial es 1.90945, por ello, podemos ver que la relación que existe entre salario inicial y salario actual es directa (al ser positivo el coeficiente).</p>
+<p>Finalmente, para construir la ecuación utilizamos los coeficientes que hemos obtenido de la siguiente manera:</p>
+<p>salario_actual = 1928.20576 + (1.90945*salario_inicial)</p>
+<p>Con esta ecuación del <em>modelo1</em>, dado un valor de salario_inicial, nosotros podemos calcular el salario actual de un trabajador.</p>
+</div>
+</div>
+</div>
+<div id="regresión-lineal-múltiple" class="section level2">
+<h2><span class="header-section-number">8.2</span> Regresión Lineal Múltiple</h2>
+<p>Te sugiero ver el siguiente tutorial para realizar un modelo de regresión lineal múltiple.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XtDQD25Ejkc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<div id="preparación-4" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Preparación</h3>
+<p><strong>Solicitamos nuestra base de datos desde la nube</strong></p>
+<pre><code>library(rio)
+base_trabajadores=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav&quot;
+trabajadores=import(base_trabajadores)
+attach(trabajadores)
+
+names(trabajadores)
+
+##  [1] &quot;id&quot;              &quot;sexo&quot;            &quot;fechnac&quot;         &quot;educ&quot;           
+##  [5] &quot;catlab&quot;          &quot;salario_actual&quot;  &quot;salario_inicial&quot; &quot;antiguedad&quot;     
+##  [9] &quot;experiencia&quot;     &quot;minoría&quot;         &quot;directivo&quot;</code></pre>
+</div>
+<div id="cálculo-1" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Cálculo</h3>
+<p>Calculamos un modelo de regresión múltiple en el cual tenemos a <em>salario_actual</em> como dependiente y contamos con tres independiente o explicativas: el salario inicial del trabajador(<em>salario_inicial</em>), los años de educación del trabajador (<em>educ</em>) y los años de antiguedad en el cargo (<em>antiguedad</em>)</p>
+<pre><code>modelo2=lm(salario_actual~salario_inicial + educ + antiguedad, data=trabajadores)</code></pre>
+<p>Luego, solicitamos el resultado utilizando la función <code>summary</code>:</p>
+<pre><code>summary(modelo2)
+
+## 
+## Call:
+## lm(formula = salario_actual ~ salario_inicial + educ + antiguedad, 
+##     data = trabajadores)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -30325  -4231   -658   2924  46707 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -1.999e+04  3.237e+03  -6.175 1.43e-09 ***
+## salario_inicial  1.689e+00  5.783e-02  29.209  &lt; 2e-16 ***
+## educ             9.661e+02  1.579e+02   6.118 2.00e-09 ***
+## antiguedad       1.557e+02  3.506e+01   4.442 1.11e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7646 on 470 degrees of freedom
+## Multiple R-squared:  0.8008, Adjusted R-squared:  0.7995 
+## F-statistic: 629.7 on 3 and 470 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Una vez tengamos nuestro resultado seguimos nuevamente los pasos de nuestro flujograma:</p>
+</div>
+<div id="análisis-1" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Análisis</h3>
+<div id="comprobar-si-nuestro-modelo-es-válido-1" class="section level4">
+<h4><span class="header-section-number">8.2.3.1</span> Comprobar si nuestro modelo es válido</h4>
+<p>Vemos la tabla ANOVA, vale decir, las últimas líneas de nuestro output del <em>modelo2</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Hipótesis nula (H0)</th>
+<th>Hipótesis alterna (Ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>El modelo no es válido</td>
+<td>El modelo es válido</td>
+</tr>
+</tbody>
+</table>
+<p>Entonces leemos el p-valor. Como en este caso obtuvimos un p valor de &lt;2.2e-16 entonces podemos ver que es menor a 0.05 (alpha), rechazamos la hipótesis nula y concluimos que <strong>nuestro modelo es válido</strong>.</p>
+</div>
+<div id="capacidad-explicativa-del-modelo-1" class="section level4">
+<h4><span class="header-section-number">8.2.3.2</span> Capacidad explicativa del modelo</h4>
+<p>Para ello, debemos ver el valor del R2 ajustado. En este caso lo interpretamos de la siguiente manera:</p>
+<p><img src="images/7-1-3.jpg" /></p>
+<p>En este caso, al tener un R2 ajustado de 0.7995 podemos concluir que nuestro modelo de regresión múltiple explica el 79.95% de la variabilidad de la dependiente (en este caso, salario actual).</p>
+</div>
+<div id="verificar-si-las-variables-xs-aporta-al-modelo" class="section level4">
+<h4><span class="header-section-number">8.2.3.3</span> Verificar si las variables X´s aporta al modelo</h4>
+<p>Ahora que estamos considerando más de una variable, debemos verificar si efectivamente las tres variables explicativas aportan al modelo.</p>
+<p>Para ello, debemos visualizar nuevamente nuestra tabla de coeficientes y analizar la línea que corresponde a la variable de nuestro interés.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Hipótesis nula (H0)</th>
+<th>Hipótesis alterna (Ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>La variable X no aporta al modelo</td>
+<td>La variable X aporta al modelo</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso, el pvalor de <em>salario_inicial</em> nos salió &lt;2e-16*** ; el de <em>educ</em> salió 2.00e-09*** ; y el de <em>antiguedad</em> salió 1.11e-05***.</p>
+<p>Por ello, podemos rechazar la hipótesis nula (la variable no aporta al modelo) en los tres casos y concluir que todas las variables aportan al modelo de regresión lineal múltiple.</p>
+<p>Nótese que todos los p-valor han venido acompañado de los tres asteriscos o estrellas. Ello indica que el grado de significancia es muy alto es las tres variables explicativas.</p>
+</div>
+<div id="identificando-los-coeficientes-y-construyendo-la-ecuación-1" class="section level4">
+<h4><span class="header-section-number">8.2.3.4</span> Identificando los coeficientes y construyendo la ecuación</h4>
+<p>Por último, solicitamos los coeficiente de nuestro modelo:</p>
+<pre><code>modelo2$coefficients
+
+##     (Intercept) salario_inicial            educ      antiguedad 
+##    -19986.50217         1.68916       966.10701       155.70118</code></pre>
+<p>Con este código le hemos dicho al programa que nos muestre los coeficientes del modelo 2. En esta ocasión, al ser una regresión lineal múltiple, tenemos cuatro número: el intercepto y el coeficiente del salario_inicial, educ y antiguedad. Sobre los coeficiente podemos ver que:</p>
+<p>Coeficiente del salario inicial es 1.90945. Es positivo, por ello, podemos ver que la relación es directa (mientras uno aumenta el otro aumenta).</p>
+<p>Coeficiente de educ es 9.66.10701. Es positivo, la relación es directa.</p>
+<p>Coeficiente de antiguedad es 155.70118. Es positivo, la relación es directa.</p>
+<p>Finalmente, para construir la ecuación utilizamos los coeficientes que hemos obtenido de la siguiente manera:</p>
+<p>salario_actual = -19986.50217 + (1.68916<em>salario_inicial) + (966.10701</em>educ) + (155.70118*antiguedad)</p>
+<p>Con esta ecuación del <em>modelo2</em>, dado un valor de salario_inicial, años de educación y años de antiguedad, nosotros podemos calcular el salario actual de un trabajador.</p>
+</div>
+</div>
+</div>
+<div id="verificación-de-supuestos" class="section level2">
+<h2><span class="header-section-number">8.3</span> Verificación de supuestos</h2>
+<p><strong>Obtenemos nuestra base de datos</strong></p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="regresión-lineal.html#cb103-1"></a><span class="kw">library</span>(rio)</span>
+<span id="cb103-2"><a href="regresión-lineal.html#cb103-2"></a>competitividad=<span class="kw">import</span>(<span class="st">&quot;https://github.com/ChristianChiroqueR/banco_de_datos/raw/main/DATA_Peru/COVID%20-%20COMPETITIVIDAD.sav&quot;</span>)</span>
+<span id="cb103-3"><a href="regresión-lineal.html#cb103-3"></a><span class="kw">names</span>(competitividad)</span></code></pre></div>
+<pre><code>##  [1] &quot;region&quot;            &quot;casos&quot;             &quot;casos_100k&quot;       
+##  [4] &quot;fallecidos&quot;        &quot;poblacion&quot;         &quot;altura&quot;           
+##  [7] &quot;pobreza&quot;           &quot;vias_pavimentadas&quot; &quot;var1&quot;             
+## [10] &quot;var2&quot;              &quot;var3&quot;              &quot;var4&quot;             
+## [13] &quot;var5&quot;              &quot;var6&quot;              &quot;var7&quot;             
+## [16] &quot;var8&quot;              &quot;var9&quot;              &quot;var10&quot;            
+## [19] &quot;var11&quot;             &quot;var12&quot;             &quot;var13&quot;            
+## [22] &quot;var14&quot;             &quot;var15&quot;             &quot;var16&quot;            
+## [25] &quot;var17&quot;             &quot;var18&quot;             &quot;var19&quot;            
+## [28] &quot;var20&quot;             &quot;var21&quot;             &quot;var22&quot;            
+## [31] &quot;var23&quot;             &quot;var24&quot;             &quot;var25&quot;            
+## [34] &quot;var26&quot;             &quot;var27&quot;             &quot;var28&quot;            
+## [37] &quot;var29&quot;             &quot;var30&quot;             &quot;var31&quot;            
+## [40] &quot;var32&quot;             &quot;var33&quot;             &quot;var34&quot;            
+## [43] &quot;var35&quot;             &quot;var36&quot;             &quot;var37&quot;            
+## [46] &quot;var38&quot;             &quot;var39&quot;             &quot;var40&quot;            
+## [49] &quot;var41&quot;             &quot;var42&quot;             &quot;var43&quot;            
+## [52] &quot;var44&quot;             &quot;var45&quot;</code></pre>
+<p><strong>Calculamos un modelo</strong></p>
+<p>Planteemos un modelo en el que deseamos predecir los casos de Covid-19 por cada 100 mil habitantes en las regiones. Para ello, vamos a utilizar las siguientes variables:</p>
+<p>Variable dependiente: Casos COVID-19 por cada 100 mil personas
+Variables independientes: Stock de capital por trabajador (var3) + gasto real por hogar mensual (var5) + morbilidad (var20).</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="regresión-lineal.html#cb105-1"></a>modelo1 &lt;-<span class="st"> </span><span class="kw">lm</span>(competitividad<span class="op">$</span>casos_100k<span class="op">~</span><span class="st"> </span>competitividad<span class="op">$</span>var3<span class="op">+</span>competitividad<span class="op">$</span>var5<span class="op">+</span></span>
+<span id="cb105-2"><a href="regresión-lineal.html#cb105-2"></a><span class="st">                </span>competitividad<span class="op">$</span>var20)</span>
+<span id="cb105-3"><a href="regresión-lineal.html#cb105-3"></a><span class="kw">summary</span>(modelo1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = competitividad$casos_100k ~ competitividad$var3 + 
+##     competitividad$var5 + competitividad$var20)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -800.31 -360.70    8.18  340.91 1331.92 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)           1.811e+03  1.206e+03   1.501  0.14986   
+## competitividad$var3   2.382e-02  8.178e-03   2.913  0.00892 **
+## competitividad$var5   1.484e+00  4.165e-01   3.563  0.00207 **
+## competitividad$var20 -3.678e+01  1.550e+01  -2.373  0.02833 * 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 548.8 on 19 degrees of freedom
+## Multiple R-squared:  0.7314, Adjusted R-squared:  0.689 
+## F-statistic: 17.25 on 3 and 19 DF,  p-value: 1.185e-05</code></pre>
+<p><strong>Una vez calculado nuestro modelo pasamos a la verificaciòn de los supuestos</strong></p>
+<div id="linealidad" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Linealidad</h3>
+<p><strong>Descrición</strong></p>
+<p>La linealidad indica que el valor esperado de la variable dependiente es una función lineal de cada variable independiente, manteniendo las demás fijas.
+La pendiente de esa línea no depende de los valores de las otras variables.
+Los efectos de diferentes variables independientes sobre el valor esperado de la variable dependiente son aditivos.</p>
+<p><strong>Cómo detectarlo</strong></p>
+<p>OPCIÓN 1: Exploración gráfica: Plot de valores residuales frente a valores predichos.</p>
+<p>OPCIÓN 2: Calculando la correlación bivariada de cada independiente con la dependiente.</p>
+<p><strong>Código e interpretación</strong></p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="regresión-lineal.html#cb107-1"></a><span class="kw">plot</span>(modelo1,<span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Los puntos deben distribuirse alrededor de una línea horizontal, con una varianza aproximadamente constante.
+Busque con atención la evidencia de un patrón, lo que indica que el modelo comete errores sistemáticos siempre que hace predicciones inusualmente grandes o pequeñas.</p>
+<p>Si usamos la correlación, entonces:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="regresión-lineal.html#cb108-1"></a><span class="kw">cor.test</span>(competitividad<span class="op">$</span>casos_100k, competitividad<span class="op">$</span>var3)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  competitividad$casos_100k and competitividad$var3
+## t = 4.3943, df = 21, p-value = 0.0002531
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3916650 0.8592019
+## sample estimates:
+##       cor 
+## 0.6921267</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="regresión-lineal.html#cb110-1"></a><span class="kw">cor.test</span>(competitividad<span class="op">$</span>casos_100k, competitividad<span class="op">$</span>var5)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  competitividad$casos_100k and competitividad$var5
+## t = 4.1847, df = 21, p-value = 0.0004178
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3630301 0.8502056
+## sample estimates:
+##      cor 
+## 0.674325</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="regresión-lineal.html#cb112-1"></a><span class="kw">cor.test</span>(competitividad<span class="op">$</span>casos_100k, competitividad<span class="op">$</span>var20)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  competitividad$casos_100k and competitividad$var20
+## t = -2.3995, df = 21, p-value = 0.02578
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.7354473 -0.0638803
+## sample estimates:
+##        cor 
+## -0.4638681</code></pre>
+<p>también lo puedes graficar para que te de una idea de forma más rápida:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="regresión-lineal.html#cb114-1"></a><span class="co">#install.packages(&quot;corrplot&quot;)</span></span>
+<span id="cb114-2"><a href="regresión-lineal.html#cb114-2"></a><span class="kw">library</span>(corrplot)</span></code></pre></div>
+<pre><code>## corrplot 0.84 loaded</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="regresión-lineal.html#cb116-1"></a><span class="co">#La funci?n cor calcula la matriz de correlaciones</span></span>
+<span id="cb116-2"><a href="regresión-lineal.html#cb116-2"></a>M&lt;-<span class="kw">cor</span>(competitividad[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">28</span>)],<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb116-3"><a href="regresión-lineal.html#cb116-3"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;circle&quot;</span>,<span class="dt">type=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regresión-lineal.html#cb117-1"></a><span class="kw">corrplot</span>(M, <span class="dt">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="regresión-lineal.html#cb118-1"></a><span class="kw">corrplot.mixed</span>(M)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+</div>
+<div id="normalidad-de-residuos" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Normalidad de residuos</h3>
+<p><strong>Descrición</strong></p>
+<p>Identificar si los errores siguen una distribución normal.</p>
+<p><strong>Cómo detectarlo</strong></p>
+<p>Exploración gráfica: QQ plot de residuos
+Pruebas de normalidad a los residuos. Normalmente bastaría con la prueba de Shapiro Wilk, pero también se pueden probar otros como Lillieford, Kolmogorov (no es muy exigente), entre otros.</p>
+<p><strong>Código e interpretación</strong></p>
+<p>Si usamos sólo gráfico</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal.html#cb119-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Todos los puntos deben estar sobre la diagonal.</p>
+<p>Si usamos prueba de normalidad</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="regresión-lineal.html#cb120-1"></a><span class="kw">shapiro.test</span>(modelo1<span class="op">$</span>resid)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  modelo1$resid
+## W = 0.96627, p-value = 0.6006</code></pre>
+<p>H0: Es normal | Ha: No es normal</p>
+<p>Si el pvalor es menor a 0.05 entonces no existe normalidad de residuos (problema!).</p>
+</div>
+<div id="homocedasticidad" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Homocedasticidad</h3>
+<p><strong>Descrición</strong></p>
+<p>La homocedasticidad indica que las variancias de los errores son constantes.
+Cuando no se cumple es un problema porque los estimadores no son consistentes ni eficientes.</p>
+<p><strong>Cómo detectarlo</strong></p>
+<p>OPCIÓN 1: Exploración gráfica: diagrama de residuos standarizados y valores predichos.</p>
+<p>OPCIÓN 2: Con el Score Test for Non-Constant Error Variance, también llamado Test Breusch Pagan. Evalúa si la varianza del error cambia con el nivel de la variable respuesta (valores ajustados) o con una combinación lineal de predictores.</p>
+<p><strong>Código e interpretación</strong></p>
+<p>Si usamos el gráfico</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regresión-lineal.html#cb122-1"></a><span class="kw">plot</span>(modelo1, <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>En el Gráfico la línea roja debe seguir una tendencia horizontal.</p>
+<p>Si usamos el BP:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="regresión-lineal.html#cb123-1"></a><span class="kw">library</span>(lmtest)</span>
+<span id="cb123-2"><a href="regresión-lineal.html#cb123-2"></a><span class="kw">bptest</span>(modelo1)</span></code></pre></div>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  modelo1
+## BP = 1.6987, df = 3, p-value = 0.6372</code></pre>
+<p>H0: El modelo es homocedástico
+Ha: El modelo es heterocedástico</p>
+<p>Si el pvalor es menor a 0.05 entonces el modelo es heterocedástico (problema!).</p>
+</div>
+<div id="ausencia-de-multicolinealidad" class="section level3">
+<h3><span class="header-section-number">8.3.4</span> Ausencia de multicolinealidad</h3>
+<p><strong>Descripción</strong></p>
+<p>Se aplica en la regresión lineal MÚLTIPLE. Significa que las variables explicativas están relacionadas linealmente entre sí. La multicolinealidad hace que los coeficientes del modelo se vuelvan inestables, es decir, oscilarán violentamente ante cambios mínimos en las variables de insumo.</p>
+<p><strong>Cómo detectarlo</strong></p>
+<p>Con el Factor de Inflación de Varianza (VIF).</p>
+<p><strong>Código e interpretación</strong></p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regresión-lineal.html#cb125-1"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb125-2"><a href="regresión-lineal.html#cb125-2"></a><span class="kw">VIF</span>(modelo1)</span></code></pre></div>
+<pre><code>##  competitividad$var3  competitividad$var5 competitividad$var20 
+##             1.337011             1.231735             1.098254</code></pre>
+<p>Valores &gt; 5 indican presencia de multicolinealidad.</p>
+</div>
+<div id="independencia-de-residuos" class="section level3">
+<h3><span class="header-section-number">8.3.5</span> Independencia de residuos</h3>
+<p><strong>Descripción</strong></p>
+<p>Si los errores residuales <strong>no son independientes</strong>, es probable que demuestren algún tipo de patrón (que no siempre es obvio a simple vista).</p>
+<p><strong>Cómo detectarlo</strong></p>
+<p>Se puede realizar el Test de Durbin Watson (que mide el grado de correlación de cada error residual con el error residual “anterior”)</p>
+<p><strong>Código e interpretación</strong></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="regresión-lineal.html#cb127-1"></a><span class="co">#Default</span></span>
+<span id="cb127-2"><a href="regresión-lineal.html#cb127-2"></a><span class="kw">library</span>(car)</span>
+<span id="cb127-3"><a href="regresión-lineal.html#cb127-3"></a><span class="kw">durbinWatsonTest</span>(modelo1)</span></code></pre></div>
+<pre><code>##  lag Autocorrelation D-W Statistic p-value
+##    1     -0.04132242      1.743747   0.492
+##  Alternative hypothesis: rho != 0</code></pre>
+<p>Durbin Watson: Las hipótesis son:
+H0: Los residuos son independientes
+Ha: Los residuos no son independientes
+Si el pvalor es menor a 0.05 entonces los residuos no son independientes o también se podría decir que están <strong>autocorrelacionados</strong> (problema!)</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducción-a-la-estadística-inferencial.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/08-reglin.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/08-reglin.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

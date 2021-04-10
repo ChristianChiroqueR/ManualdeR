@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales</title>
-  <meta name="description" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
+  <title>Capítulo 7 Introducción a la estadística inferencial | Manual de R Studio para ciencias sociales</title>
+  <meta name="description" content="Capítulo 7 Introducción a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
+  <meta property="og:title" content="Capítulo 7 Introducción a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Análisis exploratorio de datos | Manual de R Studio para ciencias sociales" />
+  <meta name="twitter:title" content="Capítulo 7 Introducción a la estadística inferencial | Manual de R Studio para ciencias sociales" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="preprocesamiento.html"/>
-<link rel="next" href="manipulación-con-tidyverse.html"/>
+<link rel="prev" href="manipulación-con-tidyverse.html"/>
+<link rel="next" href="regresión-lineal.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -281,458 +281,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análisis-exploratorio-de-datos" class="section level1">
-<h1><span class="header-section-number">Capítulo 5</span> Análisis exploratorio de datos</h1>
-<p>Como sabemos, los estadísticos de tendencia central van a depender del
-tipo de variable que estemos analizando.</p>
-<p>Para practicar este apartado vamos a utilizar la base de datos de Lapop
-del año 2017. <a href="https://www.vanderbilt.edu/lapop-espanol/">Lapop</a> es el
-Proyecto de Opinión Pública de América Latina implementado por la
-Universidad de Vanderbilt, el cual es un proyecto de investigación
-multinacional especializado en el desarrollo, implementación y análisis
-de encuestas de opinión pública.</p>
-<p>Abrimos la base de datos desde nuestro repositorio:</p>
-<pre><code>library(rio)
-link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/sub_lapop.sav&quot;
-lapop=import(link)</code></pre>
-<p>Esta base de datos ha sido editada con fines didácticos (idioma,
-recodificación, etc).</p>
-<div id="para-nominales" class="section level2">
-<h2><span class="header-section-number">5.1</span> Para nominales</h2>
-<div id="preparación" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> Preparación</h3>
-<p>Selecciones la variable <em>urbanorural</em> y procedemos a configurarla
-adecuadamente.</p>
-<p>Primero identifiquemos cómo el R está leyendo la variable.</p>
-<pre><code>str(lapop$urbanorural)
-
-##  num [1:2153] 2 2 2 2 2 2 2 2 2 2 ...
-##  - attr(*, &quot;label&quot;)= chr &quot;Urbano / Rural&quot;
-##  - attr(*, &quot;format.spss&quot;)= chr &quot;F8.2&quot;
-##  - attr(*, &quot;display_width&quot;)= int 9
-##  - attr(*, &quot;labels&quot;)= Named num [1:2] 1 2
-##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;Urbano&quot; &quot;Rural&quot;
-
-class(lapop$urbanorural)
-
-## [1] &quot;numeric&quot;</code></pre>
-<p>Luego, al ver que aún se encuentra como <em>numérico</em>, entonces lo
-convertimos en factor:</p>
-<pre><code>lapop$urbanorural=as.factor(lapop$urbanorural)
-class(lapop$urbanorural)
-
-## [1] &quot;factor&quot;</code></pre>
-<p>Verificamos los niveles y, de acuerdo con la metadata, le asignamos las
-etiquetas a cada uno de los mismos.</p>
-<pre><code>levels(lapop$urbanorural)
-
-## [1] &quot;1&quot; &quot;2&quot;
-
-levels(lapop$urbanorural)&lt;-c(&quot;Urbano&quot;,&quot;Rural&quot;)
-levels(lapop$urbanorural)
-
-## [1] &quot;Urbano&quot; &quot;Rural&quot;</code></pre>
-<p>Asimismo, podemos solicitar una tabla que nos muestre las proporciones
-por cada categoría. Para ello, utilizamos la función <code>prop.table()</code>.
-Cuando escribimos esta función hay que tener en cuenta que la tenemos
-que aplicar <em>sobre</em> la tabla de frecuencias normal (que aplicamos
-anteriormente):</p>
-<pre><code>prop.table(table(lapop$urbanorural))
-
-## 
-##    Urbano     Rural 
-## 0.6149559 0.3850441</code></pre>
-<p>Si queremos los porcentaje hacemos lo mismo pero al final le decimos que
-lo multiple por 100 (*100):</p>
-<pre><code>prop.table(table(lapop$urbanorural))*100
-
-## 
-##   Urbano    Rural 
-## 61.49559 38.50441</code></pre>
-<p>Ya tenemos la variable lista para aplicar técnicas de análisis
-descriptivo.</p>
-</div>
-<div id="estadísticos-descriptivos" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> Estadísticos descriptivos</h3>
-<p>Lo primero que podemos hacer es solicitar la función <code>summary</code>. Esta
-función nos va a dar una mirada rápida al contenido de nuestra variable.
-En el caso de ser factor, nos va a mostrar las frecuencias (incluye los
-NA si los hubiera):</p>
-<pre><code>summary(lapop$urbanorural)
-
-## Urbano  Rural 
-##   1324    829</code></pre>
-<p>Como sabemos el estadístico más idóneo para variables nominales es la
-moda. Por ello, hacemos uso del paquete <code>DescTools</code> y de la función
-<code>Mode()</code>:</p>
-<pre><code>library(DescTools)
-Mode(lapop$urbanorural)
-
-## [1] Urbano
-## attr(,&quot;freq&quot;)
-## [1] 1324
-## Levels: Urbano Rural</code></pre>
-<p>Lo que nos dice el resultado es que la moda es la categoría <em>Urbano</em> y
-nos indica la frecuencia.</p>
-<p>Otra opción también es solicitar una tabla simple para ver la frecuencia
-de cada categoría.</p>
-<pre><code>table (lapop$urbanorural)
-
-## 
-## Urbano  Rural 
-##   1324    829</code></pre>
-</div>
-<div id="gráficos" class="section level3">
-<h3><span class="header-section-number">5.1.3</span> Gráficos</h3>
-<p>Lo primero que podemos solicitar es un diagrama de pie o de sectores.
-Nótese que primero debemos crear un objeto que sea la tabla de la
-variable que deseamos graficar, en este caso, de urbano rural. De esa
-manera, el programa podrá utilizar los datos y plasmarlos en un gráfico.</p>
-<pre><code>mi_tabla &lt;- table(lapop$urbanorural)
-pie(mi_tabla)</code></pre>
-<div class="figure">
-<img src="images/4-1-1.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-<p><strong>Es recomendable graficar un máximo de 7 sectores. Si colocamos una varaible con más sector puede resultar confusa la interpretación.</strong></p>
-<p>También podemos solicitar un diagrama de barras.</p>
-<pre><code>barplot(mi_tabla)</code></pre>
-<div class="figure">
-<img src="images/4-1-2.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-<p><strong>Agregando más detalles a nuestros gráficos</strong></p>
-<p>Hasta este momento hemos visto que podemos solicitar gráficos de una
-forma muy práctica. Sin embargo, nosotros podemos solicitar un producto
-más elaborado en la medida en que agreguemos más características al
-código.</p>
-<p>Por ejemplo, si deseamos un diagrama de barras azul escribimos:</p>
-<pre><code>barplot(mi_tabla, col=&quot;blue&quot;)</code></pre>
-<div class="figure">
-<img src="images/4-1-3.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-<p>Si deseamos un diagrama de barras azul y con título escribimos:</p>
-<pre><code>barplot(mi_tabla,col=&quot;blue&quot;, 
-        main=&quot;Casos según su lugar de procedencia&quot;)</code></pre>
-<div class="figure">
-<img src="images/4-1-4.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-<p>Como nos damos cuenta, nosotros podemos ir agregando más características
-a nuestro código. Es posible que recuerdes ejemplos de códigos de
-programación que son líneas interminables. Eso es así porque los
-programadores elaboran productos muy específicos y que, en su mayoría de
-veces, requieren la especificación de muchas características.</p>
-<p>Nuestro objetivo será avanzar en el uso de estos códigos de programación
-para poder, al igual que los programadores, elaborar análisis
-estadísticas cada vez más complejos y específicos.</p>
-</div>
-</div>
-<div id="para-ordinales" class="section level2">
-<h2><span class="header-section-number">5.2</span> Para ordinales</h2>
-<p>Abrimos la base de datos LAPOP desde nuestro repositorio:</p>
-<pre><code>library(rio)
-link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/sub_lapop.sav&quot;
-lapop=import(link)</code></pre>
-<div id="preparación-1" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> Preparación</h3>
-<p>Esta vez vamos a utilizar la variable <strong>Interés en la política</strong>.
-Procedemos a configurarla adecuadamente.</p>
-<p>Primero identifiquemos cómo el R está leyendo la variable.</p>
-<pre><code>str(lapop$interes)
-
-##  num [1:2153] 2 2 1 1 1 2 2 2 2 3 ...
-##  - attr(*, &quot;label&quot;)= chr &quot;Interés en la política&quot;
-##  - attr(*, &quot;format.spss&quot;)= chr &quot;F8.2&quot;
-##  - attr(*, &quot;display_width&quot;)= int 11
-##  - attr(*, &quot;labels&quot;)= Named num [1:4] 1 2 3 4
-##   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Nada&quot; &quot;Un poco&quot; &quot;Algo&quot; &quot;Mucho&quot;
-
-class(lapop$interes)
-
-## [1] &quot;numeric&quot;</code></pre>
-<p>Luego, al ver que aún se encuentra como <em>numérico</em>, entonces lo
-convertimos en factor ordenado:</p>
-<pre><code>lapop$interes=ordered(lapop$interes)
-class(lapop$interes)
-
-## [1] &quot;ordered&quot; &quot;factor&quot;</code></pre>
-<p>Verificamos los niveles y, de acuerdo con la metadata, le asignamos las
-etiquetas a cada uno de los mismos. En este caso los significados son:
-1, “Nada”; 2, “Poco”; 3, “Algo”; y 4, “Mucho”.</p>
-<pre><code>levels(lapop$interes)
-
-## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;
-
-levels(lapop$interes)&lt;-c(&quot;Nada&quot;,&quot;Poco&quot;, &quot;Algo&quot;, &quot;Mucho&quot;)
-levels(lapop$interes)
-
-## [1] &quot;Nada&quot;  &quot;Poco&quot;  &quot;Algo&quot;  &quot;Mucho&quot;</code></pre>
-<p>Ya tenemos la variable lista para aplicar técnicas de análisis
-descriptivo para ordinales.</p>
-</div>
-<div id="estadísticos-descriptivos-1" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> Estadísticos descriptivos</h3>
-<p>Al igual que la sección anterior, podemos solicitar la función
-<code>summary()</code> para que nos muestre las frecuencias por cada categoría (en
-este caso tampoco tenemos NA´´s):</p>
-<pre><code>summary(lapop$interes)
-
-##  Nada  Poco  Algo Mucho 
-##   632   787   532   202</code></pre>
-<p>Utilizando el paquete <code>DescTools</code> podemos solicitar la moda, con la
-función <code>Mode()</code>; y la mediana, con la función <code>Median()</code>:</p>
-<pre><code>library(DescTools)
-Mode(lapop$interes)
-
-## [1] Poco
-## attr(,&quot;freq&quot;)
-## [1] 787
-## Levels: Nada &lt; Poco &lt; Algo &lt; Mucho
-
-Median(lapop$interes)
-
-## [1] Poco
-## Levels: Nada &lt; Poco &lt; Algo &lt; Mucho</code></pre>
-<p>Lo que nos dice el resultado es que la moda es la categoría <em>Poco</em>. La
-mediana nos dice que, si ordenamos los resultados de menor a mayor, el
-valor central es <em>Poco</em>. También podemos interpretarlo como que “al
-menos el 50% de los casos tienen poco interés en la política”.</p>
-<p>Otra opción, al igual que las nominales, es solicitar una tabla simple
-para ver la frecuencia de cada categoría.</p>
-<pre><code>table (lapop$interes)
-
-## 
-##  Nada  Poco  Algo Mucho 
-##   632   787   532   202</code></pre>
-</div>
-<div id="gráficos-1" class="section level3">
-<h3><span class="header-section-number">5.2.3</span> Gráficos</h3>
-<p>Primero creamos un objeto que sea la tabla de la variable que deseamos
-graficar, en este caso, <em>interés por la política</em>.</p>
-<pre><code>mi_tabla &lt;- table(lapop$interes)
-mi_tabla
-
-## 
-##  Nada  Poco  Algo Mucho 
-##   632   787   532   202</code></pre>
-<p>Solicitamos un diagrama de pie o sector con la función <code>pie()</code>:</p>
-<pre><code>pie(mi_tabla)</code></pre>
-<div class="figure">
-<img src="images/4-2-1.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-<p>Solicitamos un diagrama de barras con la función <code>barplor()</code>:</p>
-<pre><code>barplot(mi_tabla)</code></pre>
-<div class="figure">
-<img src="images/4-2-2.jpg" alt="" />
-<p class="caption">Image</p>
-</div>
-</div>
-</div>
-<div id="para-numéricas" class="section level2">
-<h2><span class="header-section-number">5.3</span> Para numéricas</h2>
-<div id="preparación-2" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Preparación</h3>
-<p>Abrimos la base de datos LAPOP desde nuestro repositorio:</p>
-<pre><code>library(rio)
-link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/sub_lapop.sav&quot;
-lapop=import(link)</code></pre>
-<p><em>Seleccionamos la variable ingresos</em></p>
-</div>
-<div id="estadísticos-descriptivos-2" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Estadísticos descriptivos</h3>
-<p>Solicitar la función <code>summary()</code> y vamos a ver que el resultado variable
-significativamente de los resultados de las variables categóricas:</p>
-<pre><code>summary(lapop$ingresos)
-
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    1316    2661    3010    3012    3341    4667</code></pre>
-<p>Como vemos, el summary ahora nos muestra los principales estadísticos de
-una variable numérica, es decir: mínimo, 1er cuartil, mediana, media o
-promedio, 3er cuartil y máximo. Siempre que tengamos una variable
-numérica comencemos por solicitar esta función.</p>
-</div>
-<div id="estadísticos-de-dispersión" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> Estadísticos de dispersión</h3>
-<p>La lógica es la misma, colocamos la función y entre paréntesis el nombre
-de la variable:</p>
-<p>Si deseamos la desviación estándar utilizamos la función <code>sd()</code>:</p>
-<pre><code>sd(lapop$ingresos)
-
-## [1] 498.6063</code></pre>
-<p>Si deseamos la varianza utilizamos la función <code>var()</code>:</p>
-<pre><code>var(lapop$ingresos)
-
-## [1] 248608.3</code></pre>
-<p>También podemos pedir estadísticos de dispersión.</p>
-<p>Para solicitar la asimetría y curtosis primero abrimos el paquete
-<code>e1071</code>:</p>
-<pre><code>library(e1071)</code></pre>
-<p>Para la asimetría utilizamos la función <code>skewness()</code>:</p>
-<pre><code>skewness(lapop$ingresos)
-
-## [1] 0.0544436</code></pre>
-<p>Para la curtosis utilizamos la función <code>kurtosis()</code>:</p>
-<pre><code>kurtosis(lapop$ingresos)
-
-## [1] -0.0678835</code></pre>
-</div>
-<div id="gráficos-2" class="section level3">
-<h3><span class="header-section-number">5.3.4</span> Gráficos</h3>
-<p>En este caso, como estamos ante una variable numérica, no necesitamos
-crear una tabla antes de solicitar los gráficos.</p>
+<div id="introducción-a-la-estadística-inferencial" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> Introducción a la estadística inferencial</h1>
+<div id="conceptos-basicos" class="section level2">
+<h2><span class="header-section-number">7.1</span> Conceptos basicos</h2>
+<p><img src="images/6-1-1.jpg" /></p>
+<p>Estos son los conceptos que veremos a lo largo del libro y que serán indispensables para comprender cada uno de los apartados:</p>
 <ul>
-<li>Histograma</li>
+<li><p><strong>Objetivo de la Estadística Inferencial</strong>: Realizar un cálculo de los parámetros poblacionales a partir de data de una muestra representativa.</p></li>
+<li><p><strong>Población</strong>: Conjunto total de individuos u objetos que tienen el mismo conjunto de características (variables) y del cual queremos obtener información.</p></li>
+<li><p><strong>Muestra</strong>: Parte de la población, es obtenida a través de un determinado proceso de muestreo. El objetivo es que sea lo más representativa posible de la población de interés.</p></li>
+<li><p><strong>Parámetro</strong>: Una característica de la población. Ej: el promedio de la edad de todos los individuos de la población.</p></li>
+<li><p><strong>Estadístico</strong>: Una característica de la muestra. Ej: el promedio de la edad de todos los individuos de mi muestra.</p></li>
 </ul>
-<p>Solicitemos un histograma con la función <code>hist()</code>:</p>
-<pre><code>hist(lapop$ingresos)</code></pre>
-<div class="figure">
-<img src="images/4-3-1.jpg" alt="" />
-<p class="caption">Image</p>
+<div id="proceso-de-la-estadística-inferencial" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Proceso de la estadística inferencial</h3>
+<p><img src="images/6-1-2.jpg" /></p>
+<p>La estadística implica el estudio de la población a través de una muestra. Esto quiere decir que con la información de un subconjunto de individuos/objetos (estadísticos) vamos a <strong>inferir</strong> las características de toda la población de individuos/objetos (parámetros). En otras palabras, con algunos datos podemos realizar generalizaciones, estimaciones y predicciones para conocer las características de una población en particular.</p>
+<p>Para realizar tal proceso nos valemos de un conjunto de técnicas y estrategias desarrolladas que utilizan cálculos de probabilidades para poder estimar los parámetros.</p>
+<p><strong>Recuerda que la muestra debe ser representativa. No es objetivo de este libro hacer un estudio sobre los métodos de muestreo; sin embargo, debes recordar que sólo el proceso de diseño muestral puede ser un trabajo largo y que requiere mucha rigurosidad. Muchos estudios estadísticos tienen el problema que llegan a conclusiones basados en muestras no representativas.</strong></p>
 </div>
+<div id="métodos-de-estimación" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Métodos de estimación</h3>
+<p>Dentro de la estadística inferencial existen dos métodos de estimación del parámetro (característica de la población): el estimador puntual, la estimación por intervalo.</p>
 <ul>
-<li>Diagrama de cajas o <strong>boxplot</strong></li>
+<li><strong>El estimador puntual</strong> es cuando nosotros representamos nuestra estimación <strong>utilizando un sólo número</strong>. Por ejemplo: nosotros realizamos una encuesta para saber la aprobación presidencial en el país y obtenemos que un 60% de la muestra aprueba la gestión del presidente. A través de este número (60%) nosotros podríamos hacernos una idea del parámetro (si es que la muestra es representativa).</li>
 </ul>
-<p>Solicitemos un diagrama de cajas con la función <code>boxplot()</code>:</p>
-<pre><code>boxplot(lapop$ingresos)</code></pre>
-<div class="figure">
-<img src="images/4-3-2.jpg" alt="" />
-<p class="caption">Image</p>
+<p>Este tipo de estimadores son usados mayormente por los medios de comunicación para problematizar cierto tema; sin embargo, no es una información que nos ayude mucho al final de cuentas.</p>
+<ul>
+<li><strong>Estimación por intervalo</strong>: Es un método que no nos entrega un sólo número sino que nos indica un <strong>intervalo</strong> en el cual se podría encontrar el parámetro población. Este se calcula a partir del estimador puntual y se le agrega un <em>margen de error</em> Ej: siguiendo el ejemplo anterior, este método nos podría indicar que el porcentaje de personas que aprueban la gestión del presidente <strong>en la población</strong> se puede encontrar entre 56% y 64%.</li>
+</ul>
+</div>
+<div id="el-rol-de-la-computadoras-y-los-software-estadísticos" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> El rol de la computadoras y los software estadísticos</h3>
+<p>Como imaginarás, hace algunas décadas todos los cálculos necesarios para realizar análisis estadísticos se realizaban a mano, esto quiere decir que los estadísticos hacían cálculos y todos los procedimientos por ellos mismo utilizando lápiz y papel.</p>
+<p><img src="images/6-1-3.jpg" /></p>
+<p>Sin embargo, gracias al avance tecnológicos hoy día tenemos las computadoras y los software estadísticos (como el R, SPSS, Stata, entre otros) que hacen los cálculos complejos por nosotros y nos brindan los resultados en muy poco tiempo.</p>
+<p>Esto, si bien es muy útil y obviamente alivia de un trabajo complejo al investigador, también ha ocasionado que muchas personas utilicen el software de forma poco rigurosa, llegando a conclusiones que muchas veces no guardan relación con la teoría que está detrás del cálculo.</p>
+<p>Por ello, antes de entrar a uno de los temas a ver aquí serán importantes dos pasos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Revisar adecuadamente la base teórica de los métodos de estadística inferencial a utilizar. Esto permitirá saber qué es lo que estamos haciendo y para qué.</p></li>
+<li><p>Revisar las funciones que utilizaremos: Estamos usando el R y en este programa, como comentamos anteriormente, hay muchas formas de llegar al mismo punto y hay muchos paquetes (y funciones) que nos permiten hacer lo mismo. Sin embargo, cada una de estas tienen ciertas particularidades que fueron diseñadas por sus creadores (recordemos que R es un software libre y las funciones son creadas por una comunidad de usuarios), por ello, es necesario saber bien qué hacen las funciones que aplicamos y cuáles son sus características.</p></li>
+</ol>
 </div>
 </div>
-</div>
-<div id="análisis-bivariado" class="section level2">
-<h2><span class="header-section-number">5.4</span> Análisis bivariado</h2>
-<div id="tablas-de-contingencia" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Tablas de contingencia</h3>
-<p>Abrimos la base de datos LAPOP desde nuestro repositorio:</p>
-<pre><code>library(rio)
-link=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/sub_lapop.sav&quot;
-lapop=import(link)</code></pre>
-<p>Verificamos y configuramos adecuadamente las variables que utilizaremos</p>
-<pre><code>lapop$urbanorural=as.factor(lapop$urbanorural)
-levels(lapop$urbanorural)&lt;-c(&quot;Urbano&quot;,&quot;Rural&quot;)
-lapop$sexo=as.factor(lapop$sexo)
-levels(lapop$sexo)&lt;-c(&quot;Hombre&quot;,&quot;Mujer&quot;)</code></pre>
-<p>Una vez que hemos identificamos dos variables categóricas lo primeros
-que podemos solicitar es una tabla de contingencia.</p>
-<p>Ante de seguir te sugiero ver el siguiente tutorial para solicitar
-tablas de contigencias:</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kzZGHLAdRAc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<div id="intervalos-de-confianza" class="section level2">
+<h2><span class="header-section-number">7.2</span> Intervalos de confianza</h2>
+<p>Te recomiendo ver el siguiente tutorial para el cálculo de intervalos de confianza en el R Studio:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WZimlAIzza0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
-<p>Como vimos en el video, podemos pedir tablas de contingencia con la
-función <code>table()</code>. Hagamos una tabla para las variables <em>urbanorural</em> y
-<em>sexo</em>:</p>
-<p>Primero hallemos una tabla de contingencia simple, con sólo las
-frecuencias. La llamaremos <em>tabla1</em>:</p>
-<pre><code>tabla1 &lt;- table(lapop$urbanorural, lapop$sexo)
-tabla1
-
-##         
-##          Hombre Mujer
-##   Urbano    687   637
-##   Rural     434   395</code></pre>
-<p>Podemos agregarle los totales marginales escribiendo la siguiente
-función <code>addmargins()</code></p>
-<pre><code>addmargins(tabla1)
-
-##         
-##          Hombre Mujer  Sum
-##   Urbano    687   637 1324
-##   Rural     434   395  829
-##   Sum      1121  1032 2153</code></pre>
-<p>Ahora, pidamos una tabla de contingencia con porcentaje Tenemos que
-hacer referencia a la tabla creada anteriormente y usar el comando
-<code>prop.table()</code> y lo multiplicamos por 100. La llamaremos <em>tabla2</em>:</p>
-<pre><code>tabla2 &lt;- prop.table(tabla1)*100
-tabla2
-
-##         
-##            Hombre    Mujer
-##   Urbano 31.90896 29.58662
-##   Rural  20.15792 18.34649</code></pre>
-<p>Vemos que nos da los valores totales, pero nosotros queremos sólo los
-porcentaje por columna. Para ello, debemos hacer referencia a las
-columnas dentro del comando agregando el número 2 (si ponemos 1
-aparecerán los porcentaje por filas)</p>
-<pre><code>tabla3 &lt;- prop.table(tabla1, 2)*100
-tabla3
-
-##         
-##            Hombre    Mujer
-##   Urbano 61.28457 61.72481
-##   Rural  38.71543 38.27519</code></pre>
-<p>Por último, podemos agregarle los totales marginales escribiendo la
-siguiente función <code>addmargins()</code></p>
-<pre><code>addmargins(tabla3)
-
-##         
-##             Hombre     Mujer       Sum
-##   Urbano  61.28457  61.72481 123.00937
-##   Rural   38.71543  38.27519  76.99063
-##   Sum    100.00000 100.00000 200.00000</code></pre>
 </div>
-<div id="una-numérica-y-una-categórica" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> Una numérica y una categórica</h3>
-<p>Para mostrar los descriptivos de una variable numérica según una
-variable categórica tenemos que considerar a esta última como grupos. De
-esta manera, lo que hacemos en realidad es la comparación de la numérica
-entre 2 o más grupos.</p>
-<p>Para ello, utilizamos el paquete <code>psych()</code></p>
-<pre><code>library(psych)</code></pre>
-<p>Para describir la varible podemos utilizar la función <code>describeBy()</code>.
-Notemos que primero debemos poner la variable numérica y luego el grupo
-de comparación.</p>
-<p>Por ejemplo, obtengamos los estadísticos descriptivos de la variable
-<em>Edad</em> según si la persona pertenece al ámbito rural o urbano
-(categórica/grupos):</p>
-<pre><code>describeBy(lapop$edad,group=lapop$urbanorural)
-
-## 
-##  Descriptive statistics by group 
-## group: Urbano
-##    vars    n  mean    sd median trimmed   mad min max range skew kurtosis  se
-## X1    1 1324 37.79 14.59     35   36.51 14.83  18  86    68 0.67    -0.27 0.4
-## ------------------------------------------------------------ 
-## group: Rural
-##    vars   n  mean    sd median trimmed   mad min max range skew kurtosis   se
-## X1    1 829 36.96 13.68     35   35.84 14.83  18  80    62 0.63    -0.25 0.48</code></pre>
-<p>También podemos solicitar un diagrama de cajas o <strong>boxplot</strong> según los
-grupos:</p>
-<pre><code>boxplot(lapop$edad~lapop$urbanorural)</code></pre>
+<div id="pruebas-de-hipótesis" class="section level2">
+<h2><span class="header-section-number">7.3</span> Pruebas de hipótesis</h2>
+<p>Luego de los intervalos de confianza, las pruebas de hipótesis son los métodos más utilizados para realizar inferencia estadística. Estas pruebas se basan en el uso de las probabilidades para realizar sus cálculos.</p>
+<p>El objetivo final es verificar qué tan probable es que una <strong>hipótesis</strong> sobre la población sea cierta. . Resume evidencia para averiguar si una hipótesis es probable.</p>
+<p><strong>Recuerda una hipótesis es una afirmación sobre la población. Usualmente presentado como la atribución de una característica al parámetro poblacional.</strong></p>
+<p>Las pruebas de hipótesis tienen 5 pasos bien definidos:</p>
+<p><img src="images/6-3-1.jpg" /></p>
+<div id="supuestos" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Supuestos</h3>
+<p>Cada prueba de hipótesis tiene ciertas condiciones en las cuales se puede aplicar.</p>
+<p>Uno de los supuestos principales requeridos es que el proceso de muestreo (recojo de información) haya sido realizado de forma aleatoria.</p>
 <div class="figure">
-<img src="images/4-4-1.jpg" alt="" />
+<img src="images/6-3-2.jpg" alt="" />
 <p class="caption">Image</p>
 </div>
+<p>El segundo supuesto más recurrente es que la variable a utilizar tenga distribución normal. Gracias al teorema del límite central, con N grande (mayor a 121) podemos asumir normalidad</p>
 </div>
-<div id="dos-variables-numéricas" class="section level3">
-<h3><span class="header-section-number">5.4.3</span> Dos variables numéricas</h3>
-<p>Utilicemos la base de datos <em>trabajadores</em>:</p>
-<pre><code>library(rio)
-base_trabajadores=&quot;https://github.com/DataPolitica/salidas/raw/master/Data/trabajadores.sav&quot;
-trabajadores=import(base_trabajadores)</code></pre>
-<p>Para analizar la relación entre dos variables numéricas es muy común
-referirse al gráfico de dispersión.</p>
-<p>Para ello, solicitamos el gráfico con la función <code>plot()</code>. Entre
-paréntesis colocar las dos variables numéricas: el salario inicial y el
-salario actual de los trabajadores de una empresa.</p>
-<pre><code>plot(trabajadores$salario_actual, trabajadores$salario_inicial)</code></pre>
-<div class="figure">
-<img src="images/4-4-2.jpg" alt="" />
-<p class="caption">Image</p>
+<div id="hipótesis" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> Hipótesis</h3>
+<p>Cada prueba de medias tiene dos hipótesis sobre la población: la hipótesis nula y la hipótesis alternativa.</p>
+<p>Nosotros vamos a poner a prueba la hipótesis nula (H0) mediante la recolección de evidencia en los datos encontrados en la muestra que anteriormente hemos recogido (o nos han entregado).</p>
+<p>Algunos ejemplos de hipótesis según el objetivo de la prueba:</p>
+<p><img src="images/6-3-3.jpg" /></p>
 </div>
-<p>Podemos especificar más elementos de nuestro gráfico de dispersión.
-Agreguemos título del gráfico y etiquetas de los ejes X e Y:</p>
-<pre><code>plot(trabajadores$salario_actual, trabajadores$salario_inicial, 
-     main=&quot;Relación entre salario inicial y salario final&quot;, 
-     xlab=&quot;Salario actual&quot;, 
-     ylab=&quot;Salario final&quot;)</code></pre>
-<div class="figure">
-<img src="images/4-4-3.jpg" alt="" />
-<p class="caption">Image</p>
+<div id="test-estadístico" class="section level3">
+<h3><span class="header-section-number">7.3.3</span> Test estadístico</h3>
+<p>Son el instrumento para validar o rechazar las hipótesis. Ellos tratan de distinguir lo que es plausible de lo que es muy poco verosímil, en el marco de un objetivo dado.</p>
+<p>Existen diversos test estadísticos dependiendo del objetivo del investigador: Pruebas T (comparación de media en dos grupos), Anova de un factor (comparación de medias en más de dos grupos), Chi cuadrado (asociación), entre los más resaltantes.</p>
 </div>
+<div id="el-p-valor-p-value" class="section level3">
+<h3><span class="header-section-number">7.3.4</span> El p-valor (p-value)</h3>
+<p>Es una medición estadística que va de 0 a 1. Se usa para el contraste de hipótesis.</p>
+<p>Si cumple con la condición de ser menor al nivel de significancia (alpha = 0.05 a un 95% de confianza) impuesto arbitrariamente, entonces la hipótesis nula será, eventualmente, rechazada.</p>
+<p>El p-valor es un número que veremos en todos nuestros análisis a lo largo de este manual. Si bien la explicación de tal término está relacionada a un conjunto de elementos teóricos de estadística, puedes ver el siguiente video que te permitirá tener una idea general de para qué sirve este número.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ibmjzFv4K1Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="conclusión" class="section level3">
+<h3><span class="header-section-number">7.3.5</span> Conclusión</h3>
+<p>Hasta este punto hemos obtenido un conjunto de números en nuestros calculos. Ahora la parte más importante es la interpretación de esos números.</p>
+<p>Es muy usual que un estudiante realice todos los pasos anteriores de forma eficiente pero tenga problemas al momento de generar conclusiones. Como dijimos, la finalidad de la estadística inferencial es establecer conclusiones sobre la población, por ello, estas deben ser presentadas de forma clara y rigurosa.</p>
+<p>Para ello, debemos seguir el siguiente flujograma:</p>
+<p><img src="images/6-3-4.jpg" /></p>
+<p>Una vez que sabemos el valor de significancia (p-valor) y si rechazamos o no rechazamos la hipótesis nula, vamos a redactar nuestra conclusión. Para ello es necesario incorporar los siguiente elementos en el fraseo: nombre de la prueba, resultado del p valor, si rechazamos o no rechazamos la hipótesis nula, y la idea o conclusión final.</p>
+<p>Ejemplo: Estamos ante una Prueba T de comparación de medias de la variable <em>Ingreso</em> en hombres y mujeres, cuya hipótesis nula es que “Las medias son iguales en los dos grupos analizados” y el p-valor que obtuvimos es 0.03. Con estos insumos redactamos:</p>
+<p>Luego de realizar la <strong>Prueba T</strong> y de acuerdo al <strong>p-valor obtenido (0.03)</strong>, podemos <strong>rechazar</strong> la hipótesis nula de que <strong>las medias de la variable Ingreso son iguales en los dos grupos analizados (hombres y mujeres)</strong> y concluir que <strong>las medias son diferentes</strong> en ambos grupos poblacionales.</p>
 
 </div>
 </div>
@@ -742,8 +386,8 @@ Agreguemos título del gráfico y etiquetas de los ejes X e Y:</p>
           </div>
         </div>
       </div>
-<a href="preprocesamiento.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manipulación-con-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="manipulación-con-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresión-lineal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -774,7 +418,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/05-eda.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/edit/master/07-inf.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -782,7 +426,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/05-eda.Rmd",
+"link": "https://github.com/ChristianChiroqueR/ManualdeR/blob/master/07-inf.Rmd",
 "text": null
 },
 "download": null,
